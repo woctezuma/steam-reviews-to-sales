@@ -8,6 +8,10 @@ def get_steam_api_url(app_id):
 
 
 def get_request_params(target_timestamp=None, verbose=True):
+    # References:
+    # - https://partner.steamgames.com/doc/store/getreviews
+    # - browser dev tools on store pages, e.g. https://store.steampowered.com/app/570/#app_reviews_hash
+
     if target_timestamp is None:
         target_timestamp = get_target_date_as_timestamp(verbose=verbose)
 
