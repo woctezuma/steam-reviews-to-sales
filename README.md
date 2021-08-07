@@ -15,11 +15,13 @@ pip install -r requirements.txt
 
 ## Usage
 
-- To download to `data/review_stats.json` review numbers as they were on July 1, 2018 for 13,275 games of interest, run:
+- To download review numbers as they were on July 1, 2018 for 13,275 games of interest, run:
 
 ```bash
 python download_data.py
 ```
+
+Data is downloaded to `data/review_stats.json`.
 
 ## References
 
