@@ -48,12 +48,9 @@ def convert_from_datetime_to_timestamp(date_as_datetime, verbose=True):
     return date_as_timestamp
 
 
-def get_target_date_as_timestamp(target_date=None, date_format=None, verbose=True):
+def get_target_date_as_timestamp(target_date=None, date_format=None):
     target_datetime = get_target_date_as_datetime(target_date, date_format)
-    target_timestamp = int(datetime.timestamp(target_datetime))
-
-    if verbose:
-        print(f"Unix timestamp: {target_timestamp}")
+    target_timestamp = convert_from_datetime_to_timestamp(target_datetime)
 
     return target_timestamp
 
