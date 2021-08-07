@@ -76,6 +76,7 @@ def download_data(app_ids, verbose=True):
             write_output_dict(data)
 
         if query_count % rate_limits["max_num_queries"] == 0:
+            write_output_dict(data)
             cooldown_duration = rate_limits["cooldown"]
             print(f"#queries {query_count} reached. Cooldown: {cooldown_duration} s")
             time.sleep(cooldown_duration)
