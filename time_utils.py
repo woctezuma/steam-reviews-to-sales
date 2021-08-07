@@ -58,11 +58,19 @@ def get_target_date_as_timestamp(target_date=None, date_format=None, verbose=Tru
     return target_timestamp
 
 
+def get_today_as_timestamp():
+    today_datetime = get_today_as_datetime()
+    today_timestamp = convert_from_datetime_to_timestamp(today_datetime)
+
+    return today_timestamp
+
+
 def main():
     target_date = get_target_date()
     date_format = get_date_format()
     day_range = get_day_range(target_date, date_format)
     target_timestamp = get_target_date_as_timestamp(target_date, date_format)
+    today_timestamp = get_today_as_timestamp()
 
     return True
 
