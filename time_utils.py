@@ -35,10 +35,21 @@ def get_day_range(target_date=None, date_format=None, verbose=True):
     return day_range
 
 
+def get_target_date_as_timestamp(target_date=None, date_format=None, verbose=True):
+    target_datetime = get_target_date_as_datetime(target_date, date_format)
+    target_timestamp = int(datetime.timestamp(target_datetime))
+
+    if verbose:
+        print(f"Unix timestamp: {get_target_date_as_timestamp()}")
+
+    return target_timestamp
+
+
 def main():
     target_date = get_target_date()
     date_format = get_date_format()
     day_range = get_day_range(target_date, date_format)
+    target_timestamp = get_target_date_as_timestamp(target_date, date_format)
 
     return True
 
