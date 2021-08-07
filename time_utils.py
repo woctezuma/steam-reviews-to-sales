@@ -9,6 +9,10 @@ def get_date_format():
     return "%Y-%m-%d"
 
 
+def get_today_as_datetime():
+    return datetime.now()
+
+
 def get_target_date_as_datetime(target_date=None, date_format=None):
     if target_date is None:
         target_date = get_target_date()
@@ -22,7 +26,7 @@ def get_target_date_as_datetime(target_date=None, date_format=None):
 
 
 def get_day_range(target_date=None, date_format=None, verbose=True):
-    current_date = datetime.now()
+    current_date = get_today_as_datetime()
     date_threshold = get_target_date_as_datetime(target_date, date_format)
 
     dt = current_date - date_threshold
