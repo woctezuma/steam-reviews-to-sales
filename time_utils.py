@@ -9,15 +9,21 @@ def get_date_format():
     return "%Y-%m-%d"
 
 
-def get_day_range(target_date=None, date_format=None, verbose=True):
+def get_target_date_as_datetime(target_date=None, date_format=None):
     if target_date is None:
         target_date = get_target_date()
 
     if date_format is None:
         date_format = get_date_format()
 
+    target_datetime = datetime.strptime(target_date, date_format)
+
+    return target_datetime
+
+
+def get_day_range(target_date=None, date_format=None, verbose=True):
     current_date = datetime.now()
-    date_threshold = datetime.strptime(target_date, date_format)
+    date_threshold = get_target_date_as_datetime(target_date, date_format)
 
     dt = current_date - date_threshold
 
