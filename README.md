@@ -2,6 +2,17 @@
 
 This repository contains Python code to study the relationship between review numbers and sales for Steam games.
 
+## Requirements
+
+- Install the latest version of [Python 3.X][python-download].
+- Install the required packages:
+
+```bash
+pip install -r requirements.txt
+```
+
+[python-download]: <https://www.python.org/downloads/>
+
 ## References
 
 ### Data leak for sales
