@@ -54,6 +54,7 @@ def download_data(app_ids, verbose=True):
     unprocessed_app_ids = set(app_ids).difference(processed_app_ids)
 
     rate_limits = get_rate_limits()
+    save_every = 15
 
     for query_count, app_id in enumerate(unprocessed_app_ids, start=1):
         print(f"[{query_count}/{len(unprocessed_app_ids)}] Query for appID = {app_id}")
@@ -68,9 +69,11 @@ def download_data(app_ids, verbose=True):
                 app_info[key] = query_summary[key]
 
             data[app_id] = app_info
-            write_output_dict(data)
         else:
             print(f"[X] Query failed for appID = {app_id}")
+
+        if (query_count % save_every == 0) or (query_count == len(unprocessed_app_ids)):
+            write_output_dict(data)
 
         if query_count % rate_limits["max_num_queries"] == 0:
             cooldown_duration = rate_limits["cooldown"]
