@@ -30,8 +30,8 @@ def get_rate_limits():
     # Reference: https://github.com/woctezuma/download-steam-reviews/blob/master/steamreviews/download_reviews.py
 
     rate_limits = {
-        "max_num_queries": 150,
-        "cooldown": (5 * 60) + 10,  # 5 minutes plus a cushion,
+        "max_num_queries": 600,
+        "cooldown": (4 * 60) + 10,  # 4 minutes plus a cushion,
     }
 
     return rate_limits
