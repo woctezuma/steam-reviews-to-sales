@@ -13,6 +13,14 @@ pip install -r requirements.txt
 
 [python-download]: <https://www.python.org/downloads/>
 
+## Usage
+
+- To download to `data/review_stats.json` review numbers as they were on July 1, 2018 for 13,275 games of interest, run:
+
+```bash
+python download_data.py
+```
+
 ## References
 
 ### Data leak for sales
