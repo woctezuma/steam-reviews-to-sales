@@ -40,7 +40,7 @@ def get_target_date_as_timestamp(target_date=None, date_format=None, verbose=Tru
     target_timestamp = int(datetime.timestamp(target_datetime))
 
     if verbose:
-        print(f"Unix timestamp: {get_target_date_as_timestamp()}")
+        print(f"Unix timestamp: {target_timestamp}")
 
     return target_timestamp
 
