@@ -7,9 +7,9 @@ def get_steam_api_url(app_id):
     return f"https://store.steampowered.com/appreviews/{app_id}"
 
 
-def get_request_params(target_timestamp=None):
+def get_request_params(target_timestamp=None, verbose=True):
     if target_timestamp is None:
-        target_timestamp = get_target_date_as_timestamp()
+        target_timestamp = get_target_date_as_timestamp(verbose=verbose)
 
     params = {
         "json": "1",
@@ -24,7 +24,7 @@ def get_request_params(target_timestamp=None):
 
 def download_review_stats(app_id, target_timestamp=None, verbose=True):
     url = get_steam_api_url(app_id)
-    params = get_request_params(target_timestamp)
+    params = get_request_params(target_timestamp, verbose=verbose)
 
     response = requests.get(url, params=params)
 
