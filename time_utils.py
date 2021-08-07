@@ -36,7 +36,9 @@ def get_day_range(target_date=None, date_format=None, verbose=True):
 
 
 def main():
-    day_range = get_day_range()
+    target_date = get_target_date()
+    date_format = get_date_format()
+    day_range = get_day_range(target_date, date_format)
 
     return True
 
