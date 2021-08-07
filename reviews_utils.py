@@ -18,6 +18,9 @@ def get_request_params(target_timestamp=None, verbose=True):
     params = {
         "json": "1",
         "num_per_page": "0",  # text content of reviews is not needed
+        "language": "all",  # caveat: default seems to be "english", so reviews would be missing if unchanged!
+        "purchase_type": "all",  # caveat: default is "steam", so reviews would be missing if unchanged!
+        "filter_offtopic_activity": "0",  # to un-filter review-bombs, e.g. https://store.steampowered.com/app/481510/
         "start_date": "1",  # this is the minimal value which allows to filter by date
         "end_date": str(target_timestamp),
         "date_range_type": "include",  # this parameter is needed to filter by date
