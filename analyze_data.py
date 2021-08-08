@@ -106,7 +106,7 @@ def superimpose_vginsights(ax, x_test):
     # Reference: https://vginsights.com/insights/article/how-to-estimate-steam-video-game-sales
     #
     # Below, we use the most lenient, i.e. the largest, range of ratios for the period up to the data leak (July 2018).
-    # Ideally, data points should lie between the 2 red lines corresponding to these ratios. In practice, they are not.
+    # Ideally, data points should lie between the 2 red lines corresponding to these ratios. In practice, they do not.
     ratio_range = [25, 100]
 
     for ratio in ratio_range:
