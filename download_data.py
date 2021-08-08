@@ -1,8 +1,8 @@
 import json
 import time
 
-from data_utils import load_app_ids
-from reviews_utils import download_review_stats
+from utils.data_utils import load_app_ids
+from utils.reviews_utils import download_review_stats
 
 
 def get_ouput_fname():

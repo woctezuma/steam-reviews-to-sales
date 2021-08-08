@@ -1,6 +1,6 @@
 import requests
 
-from time_utils import get_target_date_as_timestamp
+from utils.time_utils import get_target_date_as_timestamp
 
 
 def get_steam_api_url(app_id):
