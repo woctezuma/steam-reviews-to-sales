@@ -88,7 +88,7 @@ def plot_df(df, use_log_log_scale=False):
     return ax
 
 
-def plot_data(x, y, xlabel="#reviews", ylabel="#owners"):
+def plot_arrays(x, y, xlabel="#reviews", ylabel="#owners"):
     fig, ax = plt.subplots()
     ax.scatter(x, y, s=10, alpha=0.5, label="observation")
     plt.xlabel(xlabel)
