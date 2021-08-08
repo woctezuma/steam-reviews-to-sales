@@ -1,1 +1,5 @@
+pandas
+scikit-learn
 steamreviews
+tidfit
+PyQt5
