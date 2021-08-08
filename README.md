@@ -23,6 +23,18 @@ python download_data.py
 
 Data is downloaded to `data/review_stats.json`.
 
+- To filter extreme values and display a scatter plot of the data, run:
+
+```bash
+python analyze_data.py
+```
+
+- To fit a model to the data, run:
+
+```bash
+python fit_model.py
+```
+
 ## References
 
 ### Data leak for sales
