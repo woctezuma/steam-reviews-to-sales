@@ -3,3 +3,4 @@ scikit-learn
 steamreviews
 tidfit
 PyQt5
+seaborn
