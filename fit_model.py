@@ -12,6 +12,22 @@ from analyze_data import (
 )
 
 
+def plot_predictions(x_train, y_train, x_test, ymean, ystd=0):
+    ax = plot_arrays(x_train, y_train)
+    ax.plot(x_test, ymean, color="red", label="predict mean")
+    ax.fill_between(
+        x_test,
+        ymean - ystd,
+        ymean + ystd,
+        color="pink",
+        alpha=0.5,
+        label="predict std",
+    )
+    ax.legend()
+
+    return
+
+
 def main():
     matplotlib.use("Qt5Agg")
 
@@ -47,17 +63,7 @@ def main():
     reg.fit(X_train, y_train)
     ymean, ystd = reg.predict(X_test, return_std=True)
 
-    ax = plot_arrays(x_train, y_train)
-    ax.plot(x_test, ymean, color="red", label="predict mean")
-    ax.fill_between(
-        x_test,
-        ymean - ystd,
-        ymean + ystd,
-        color="pink",
-        alpha=0.5,
-        label="predict std",
-    )
-    ax.legend()
+    plot_predictions(x_train, y_train, x_test, ymean, ystd)
     plt.show()
 
     return True
