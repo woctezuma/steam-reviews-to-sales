@@ -20,7 +20,7 @@ def load_input_data(fname=None, skip_header=True):
         for row in f_reader:
             app_name = row[0]
             num_players = row[1]
-            app_id = int(row[2])
+            app_id = str(row[2])
 
             data[app_id] = dict()
             data[app_id]["name"] = app_name.strip()
