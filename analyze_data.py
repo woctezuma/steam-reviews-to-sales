@@ -2,6 +2,7 @@ import matplotlib
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+import seaborn as sns
 
 from download_data import load_output_dict
 from utils.data_utils import load_input_data
@@ -73,6 +74,20 @@ def get_arrays_from(df):
     return x_train, y_train
 
 
+def plot_df(df, use_log_log_scale=False):
+    fig, ax = plt.subplots()
+
+    if use_log_log_scale:
+        # Reference: https://stackoverflow.com/a/23918246/376454
+        ax.set(xscale="log", yscale="log")
+
+    # Each datapoint is colored based on its review score (an integer between 0 and 9).
+    # Reference: https://stackoverflow.com/a/14887119/376454
+    sns.scatterplot(data=df, x="total_reviews", y="sales", ax=ax, hue="review_score")
+
+    return ax
+
+
 def plot_data(x, y, xlabel="#reviews", ylabel="#owners"):
     fig, ax = plt.subplots()
     ax.scatter(x, y, s=10, alpha=0.5, label="observation")
@@ -88,20 +103,15 @@ def main():
     df = load_aggregated_data_as_df()
     df = remove_extreme_values(df, "sales")
     df = remove_extreme_values(df, "total_reviews")
-    x_train, y_train = get_arrays_from(df)
 
-    plot_data(x_train, y_train, xlabel="#reviews", ylabel="#owners")
+    ax = plot_df(df)
     plt.show()
 
     df = load_aggregated_data_as_df()
     df = remove_extreme_values(df, "sales")
     df = remove_extreme_values(df, "total_reviews", 0.25, 1.0)
-    x_train, y_train = get_arrays_from(df)
 
-    y_train = np.log10(y_train)
-    x_train = np.log10(x_train)
-
-    plot_data(x_train, y_train, xlabel="log10(#reviews)", ylabel="log10(#owners)")
+    ax = plot_df(df, use_log_log_scale=True)
     plt.show()
 
     return True
