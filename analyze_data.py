@@ -97,6 +97,22 @@ def plot_arrays(x, y, xlabel="#reviews", ylabel="#owners"):
     return ax
 
 
+def superimpose_vginsights(ax, x_test):
+    # In a graph titled "Review Multipliers to Use for Units Sold Estimate (Boxleiter ratio) for 2021", VG Insights
+    # suggests a range of ratios for different periods of time: pre-2014, 2014-2016, 2017, 2018-2019, 2020 and onwards.
+    # Reference: https://vginsights.com/insights/article/how-to-estimate-steam-video-game-sales
+    #
+    # Below, we use the most lenient, i.e. the largest, range of ratios for the period up to the data leak (July 2018).
+    # Ideally, data points should lie between the 2 red lines corresponding to these ratios. In practice, they are not.
+    ratio_range = [25, 100]
+
+    for ratio in ratio_range:
+        ymean = ratio * x_test
+        ax.plot(x_test, ymean, color="red")
+
+    return
+
+
 def main():
     matplotlib.use("Qt5Agg")
 
@@ -105,6 +121,7 @@ def main():
     df = remove_extreme_values(df, "total_reviews")
 
     ax = plot_df(df)
+    superimpose_vginsights(ax, x_test=df["total_reviews"])
     plt.show()
 
     df = load_aggregated_data_as_df()
@@ -112,6 +129,7 @@ def main():
     df = remove_extreme_values(df, "total_reviews", 0.25, 1.0)
 
     ax = plot_df(df, use_log_log_scale=True)
+    superimpose_vginsights(ax, x_test=df["total_reviews"])
     plt.show()
 
     return True
