@@ -36,8 +36,11 @@ def load_aggregated_data_as_df(sort_by_num_reviews=False, verbose=True):
     if sort_by_num_reviews:
         df = df.sort_values("total_reviews")
 
+    # Ensure that review_score is interpreted as a categorical variable
+    df["review_score"] = df["review_score"].astype("category")
+
     if verbose:
-        print(df[["review_score", "total_reviews", "sales"]].describe())
+        print(df[["total_reviews", "sales"]].describe())
         print(list(df.columns))
 
     return df
