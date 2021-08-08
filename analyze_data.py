@@ -67,8 +67,11 @@ def remove_extreme_values(
     return df
 
 
-def get_arrays_from(df):
-    x_train = np.array(df["total_reviews"])
+def get_arrays_from(df, num_features=1):
+    if num_features == 1:
+        x_train = np.array(df["total_reviews"])
+    else:
+        x_train = np.array(df[["total_positive", "total_negative"]])
     y_train = np.array(df["sales"])
 
     return x_train, y_train
