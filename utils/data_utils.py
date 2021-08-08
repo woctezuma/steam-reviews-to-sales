@@ -45,7 +45,8 @@ def load_app_ids(data=None, fname=None, verbose=True):
 
 
 def main():
-    fname = get_input_fname()
+    parent_folder = "../"
+    fname = parent_folder + get_input_fname()
     data = load_input_data(fname, skip_header=True)
     app_ids = load_app_ids(data)
 
