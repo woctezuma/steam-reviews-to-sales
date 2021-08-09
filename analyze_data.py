@@ -117,7 +117,7 @@ def superimpose_vginsights(ax, x_test):
     return
 
 
-def easy_plot(df, use_log_log_scale=False, enforce_plot_limits=True):
+def easy_plot(df, use_log_log_scale=False, enforce_plot_limits=False):
     if use_log_log_scale:
         y_lim = [10, 10 ** 7]
         x_lim = [10, 10 ** 5]
