@@ -8,24 +8,8 @@ from analyze_data import (
     load_aggregated_data_as_df,
     remove_extreme_values,
     get_arrays_from,
-    plot_arrays,
 )
-
-
-def plot_predictions(x_train, y_train, x_test, ymean, ystd=0):
-    ax = plot_arrays(x_train, y_train)
-    ax.plot(x_test, ymean, color="red", label="predict mean")
-    ax.fill_between(
-        x_test,
-        ymean - ystd,
-        ymean + ystd,
-        color="pink",
-        alpha=0.5,
-        label="predict std",
-    )
-    ax.legend()
-
-    return
+from utils.plot_utils import plot_arrays, plot_predictions
 
 
 def main():
