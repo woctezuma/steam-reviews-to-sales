@@ -6,6 +6,7 @@ import seaborn as sns
 
 from download_data import load_output_dict
 from utils.data_utils import load_input_data
+from utils.reviews_utils import get_review_score_descriptions
 
 
 def load_aggregated_data_as_dict(verbose=True):
@@ -138,22 +139,25 @@ def easy_plot(df, use_log_log_scale=False, enforce_plot_limits=True):
 
 def main():
     matplotlib.use("Qt5Agg")
+    review_score_descriptions = get_review_score_descriptions()
 
     df = load_aggregated_data_as_df()
     df = remove_extreme_values(df, "sales")
     df = remove_extreme_values(df, "total_reviews")
 
-    ax = plot_df(df)
-    superimpose_vginsights(ax, x_test=df["total_reviews"])
-    plt.show()
+    easy_plot(df)
+
+    for i in review_score_descriptions.keys():
+        easy_plot(df[df["review_score"] == i])
 
     df = load_aggregated_data_as_df()
     df = remove_extreme_values(df, "sales")
     df = remove_extreme_values(df, "total_reviews", 0.25, 1.0)
 
-    ax = plot_df(df, use_log_log_scale=True)
-    superimpose_vginsights(ax, x_test=df["total_reviews"])
-    plt.show()
+    easy_plot(df)
+
+    for i in review_score_descriptions.keys():
+        easy_plot(df[df["review_score"] == i])
 
     return True
 
