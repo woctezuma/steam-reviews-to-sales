@@ -1,15 +1,35 @@
 import matplotlib
 import matplotlib.pyplot as plt
-import numpy as np
 import tidfit
-from sklearn.linear_model import BayesianRidge
+from sklearn import linear_model
+from sklearn.model_selection import train_test_split
 
 from analyze_data import (
     load_aggregated_data_as_df,
     remove_extreme_values,
-    get_arrays_from,
 )
 from utils.plot_utils import plot_arrays, plot_predictions, plot_pie
+
+
+def fit_linear_model(X, y, fit_intercept=True):
+    # Reference: https://scikit-learn.org/stable/supervised_learning.html
+
+    X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=0)
+
+    model = linear_model.LinearRegression(fit_intercept=fit_intercept)
+    model.fit(X_train, y_train)
+
+    y_pred = model.predict(X_test)
+
+    score_train = model.score(X_train, y_train)
+    score_test = model.score(X_test, y_test)
+
+    print(f"[training] R²: {score_train}")
+    print(f"[test] R²: {score_test}")
+    print(f"[model] coefficients: {model.coef_}")
+    print(f"[model] intercept: {model.intercept_}")
+
+    return model
 
 
 def main():
@@ -20,9 +40,14 @@ def main():
     df = remove_extreme_values(df, "sales")
     df = remove_extreme_values(df, "total_reviews", 0.25, 1.0)
 
-    x_train, y_train = get_arrays_from(df)
-    y_train = np.log10(y_train)
-    x_train = np.log10(x_train)
+    # Filter by review score
+    df = df[df["review_score"] == 9]
+
+    X = df.loc[:, df.columns == "total_reviews"]
+    y = df["sales"]
+
+    x_train = X.squeeze()
+    y_train = y
 
     # Reference: https://github.com/aminnj/tidfit
 
@@ -34,21 +59,9 @@ def main():
     out = tidfit.fit("a*x+b", x_train, y_train)
     plt.show()
 
-    # Reference: https://scikit-learn.org/stable/auto_examples/linear_model/plot_bayesian_ridge_curvefit.html
-
-    x_test = x_train
-
-    # Fit by cubic polynomial
-    n_order = 3
-    X_train = np.vander(x_train, n_order + 1, increasing=True)
-    X_test = np.vander(x_test, n_order + 1, increasing=True)
-
-    # Plot the true and predicted curves with log marginal likelihood (L)
-    reg = BayesianRidge(tol=1e-6, fit_intercept=False, compute_score=True)
-    reg.fit(X_train, y_train)
-    ymean, ystd = reg.predict(X_test, return_std=True)
-
-    plot_predictions(x_train, y_train, x_test, ymean, ystd)
+    model = fit_linear_model(X, y, fit_intercept=True)
+    y_pred = model.predict(X)
+    plot_predictions(X, y, X.squeeze(), ymean=y_pred, ystd=0)
     plt.show()
 
     return True
