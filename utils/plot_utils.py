@@ -3,6 +3,28 @@ import seaborn as sns
 from matplotlib import pyplot as plt
 
 
+def plot_pie(df, percentage_threshold=5):
+    # Reference: https://stackoverflow.com/a/63688022/376454
+
+    def label_function(val):
+        n = val / 100 * len(df)
+        if val < percentage_threshold:
+            s = ""
+        else:
+            s = f"{val:.0f}% ({n:.0f})"
+        return s
+
+    fig, ax = plt.subplots()
+    df.groupby("review_score_desc").size().sort_values().plot(
+        kind="pie", autopct=label_function, textprops={"fontsize": 12}, ax=ax
+    )
+    ax.set_ylabel("", size=10)
+    plt.tight_layout()
+    plt.show()
+
+    return
+
+
 def plot_df(df, use_log_log_scale=False, x_column_name="total_reviews"):
     fig, ax = plt.subplots()
 

@@ -9,13 +9,14 @@ from analyze_data import (
     remove_extreme_values,
     get_arrays_from,
 )
-from utils.plot_utils import plot_arrays, plot_predictions
+from utils.plot_utils import plot_arrays, plot_predictions, plot_pie
 
 
 def main():
     matplotlib.use("Qt5Agg")
 
     df = load_aggregated_data_as_df(sort_by_num_reviews=True)
+    plot_pie(df)
     df = remove_extreme_values(df, "sales")
     df = remove_extreme_values(df, "total_reviews", 0.25, 1.0)
 
