@@ -154,10 +154,10 @@ def main():
     df = remove_extreme_values(df, "sales")
     df = remove_extreme_values(df, "total_reviews", 0.25, 1.0)
 
-    easy_plot(df)
+    easy_plot(df, use_log_log_scale=True)
 
     for i in review_score_descriptions.keys():
-        easy_plot(df[df["review_score"] == i])
+        easy_plot(df[df["review_score"] == i], use_log_log_scale=True)
 
     return True
 
