@@ -46,6 +46,23 @@ def download_review_stats(app_id, target_timestamp=None, verbose=True):
     return result
 
 
+def get_review_score_descriptions():
+    review_score_descriptions = {
+        0: "[No|1-9] user reviews",
+        1: "Overwhelmingly Negative",
+        2: "Very Negative",
+        3: "Negative",
+        4: "Mostly Negative",
+        5: "Mixed",
+        6: "Mostly Positive",
+        7: "Positive",
+        8: "Very Positive",
+        9: "Overwhelmingly Positive",
+    }
+
+    return review_score_descriptions
+
+
 def main():
     app_ids = [329070, 573170]
     target_timestamp = get_target_date_as_timestamp()
