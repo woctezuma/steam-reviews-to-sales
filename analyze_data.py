@@ -116,6 +116,26 @@ def superimpose_vginsights(ax, x_test):
     return
 
 
+def easy_plot(df, use_log_log_scale=False, enforce_plot_limits=True):
+    if use_log_log_scale:
+        y_lim = [10, 10 ** 7]
+        x_lim = [10, 10 ** 5]
+    else:
+        y_lim = [0, 2.6 * 10 ** 6]
+        x_lim = [0, 1.3 * 10 ** 4]
+
+    ax = plot_df(df, use_log_log_scale=use_log_log_scale)
+    superimpose_vginsights(ax, x_test=df["total_reviews"])
+
+    if enforce_plot_limits:
+        plt.ylim(y_lim)
+        plt.xlim(x_lim)
+
+    plt.show()
+
+    return
+
+
 def main():
     matplotlib.use("Qt5Agg")
 
