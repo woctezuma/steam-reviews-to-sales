@@ -78,7 +78,7 @@ def get_arrays_from(df, num_features=1):
     return x_train, y_train
 
 
-def plot_df(df, use_log_log_scale=False):
+def plot_df(df, use_log_log_scale=False, x_column_name="total_reviews"):
     fig, ax = plt.subplots()
 
     if use_log_log_scale:
@@ -87,7 +87,7 @@ def plot_df(df, use_log_log_scale=False):
 
     # Each datapoint is colored based on its review score (an integer between 0 and 9).
     # Reference: https://stackoverflow.com/a/14887119/376454
-    sns.scatterplot(data=df, x="total_reviews", y="sales", ax=ax, hue="review_score")
+    sns.scatterplot(data=df, x=x_column_name, y="sales", ax=ax, hue="review_score")
 
     return ax
 
@@ -117,7 +117,12 @@ def superimpose_vginsights(ax, x_test):
     return
 
 
-def easy_plot(df, use_log_log_scale=False, enforce_plot_limits=False):
+def easy_plot(
+    df,
+    use_log_log_scale=False,
+    enforce_plot_limits=False,
+    x_column_name="total_reviews",
+):
     if use_log_log_scale:
         y_lim = [10, 10 ** 7]
         x_lim = [10, 10 ** 5]
@@ -125,8 +130,8 @@ def easy_plot(df, use_log_log_scale=False, enforce_plot_limits=False):
         y_lim = [0, 2.6 * 10 ** 6]
         x_lim = [0, 1.3 * 10 ** 4]
 
-    ax = plot_df(df, use_log_log_scale=use_log_log_scale)
-    superimpose_vginsights(ax, x_test=df["total_reviews"])
+    ax = plot_df(df, use_log_log_scale=use_log_log_scale, x_column_name=x_column_name)
+    superimpose_vginsights(ax, x_test=df[x_column_name])
 
     if enforce_plot_limits:
         plt.ylim(y_lim)
