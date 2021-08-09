@@ -148,7 +148,7 @@ def main():
     easy_plot(df)
 
     for i in review_score_descriptions.keys():
-        easy_plot(df[df["review_score"] == i])
+        easy_plot(df[df["review_score"] == i], enforce_plot_limits=True)
 
     df = load_aggregated_data_as_df()
     df = remove_extreme_values(df, "sales")
@@ -157,7 +157,11 @@ def main():
     easy_plot(df, use_log_log_scale=True)
 
     for i in review_score_descriptions.keys():
-        easy_plot(df[df["review_score"] == i], use_log_log_scale=True)
+        easy_plot(
+            df[df["review_score"] == i],
+            use_log_log_scale=True,
+            enforce_plot_limits=True,
+        )
 
     return True
 
