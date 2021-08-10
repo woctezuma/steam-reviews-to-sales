@@ -63,6 +63,18 @@ def get_review_score_descriptions():
     return review_score_descriptions
 
 
+def unify_descriptions(df):
+    review_score_descriptions = get_review_score_descriptions()
+
+    df = df.replace(
+        {"review_score_desc": review_score_descriptions[0]},
+        {"review_score_desc": review_score_descriptions[0]},
+        regex=True,
+    )
+
+    return df
+
+
 def main():
     app_ids = [329070, 573170]
     target_timestamp = get_target_date_as_timestamp()
