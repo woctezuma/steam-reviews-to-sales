@@ -48,7 +48,7 @@ def download_review_stats(app_id, target_timestamp=None, verbose=True):
 
 def get_review_score_descriptions():
     review_score_descriptions = {
-        0: "[No|1-9] user reviews",
+        0: "(No|[1-9]) user reviews",
         1: "Overwhelmingly Negative",
         2: "Very Negative",
         3: "Negative",
