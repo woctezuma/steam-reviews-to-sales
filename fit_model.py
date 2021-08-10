@@ -9,6 +9,7 @@ from analyze_data import (
     remove_extreme_values,
 )
 from utils.plot_utils import plot_arrays, plot_predictions, plot_pie
+from utils.reviews_utils import unify_descriptions
 
 
 def fit_linear_model(X, y, fit_intercept=True):
@@ -37,6 +38,7 @@ def main():
 
     df = load_aggregated_data_as_df(sort_by_num_reviews=True)
     plot_pie(df)
+    plot_pie(unify_descriptions(df), percentage_threshold=1)
     df = remove_extreme_values(df, "sales")
     df = remove_extreme_values(df, "total_reviews", 0.25, 1.0)
 
