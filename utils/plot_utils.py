@@ -89,7 +89,7 @@ def easy_plot(
     return
 
 
-def plot_predictions(x_train, y_train, x_test, ymean, ystd=0):
+def plot_predictions(x_train, y_train, x_test, ymean, ystd=0, xlim=None, ylim=None):
     ax = plot_arrays(x_train, y_train)
     ax.plot(x_test, ymean, color="red", label="predict mean")
     ax.fill_between(
@@ -101,6 +101,10 @@ def plot_predictions(x_train, y_train, x_test, ymean, ystd=0):
         label="predict std",
     )
     ax.legend()
+    if xlim is not None:
+        ax.set_xlim([0, xlim])
+    if ylim is not None:
+        ax.set_ylim([0, ylim])
 
     return
 
