@@ -1,4 +1,5 @@
 import matplotlib
+import numpy as np
 import seaborn as sns
 from matplotlib import pyplot as plt
 
@@ -106,6 +107,55 @@ def plot_predictions(x_train, y_train, x_test, ymean, ystd=None, xlim=None, ylim
         ax.set_xlim([0, xlim])
     if ylim is not None:
         ax.set_ylim([0, ylim])
+
+    return
+
+
+def grid_plot(df, x_label="total_reviews", y_label="sales", alpha=0.5):
+    x = df[x_label]
+    y = df[y_label]
+
+    fig, ax = plt.subplots(nrows=2, ncols=2)
+
+    ax[0, 0].scatter(x, y, alpha=alpha)
+    ax[1, 0].scatter(np.log1p(x), y, alpha=alpha)
+    ax[0, 1].scatter(x, np.log1p(y), alpha=alpha)
+    ax[1, 1].scatter(np.log1p(x), np.log1p(y), alpha=alpha)
+
+    ax[0, 0].set_xlabel(f"{x_label}")
+    ax[1, 0].set_xlabel(f"log({x_label})")
+    ax[0, 1].set_xlabel(f"{x_label}")
+    ax[1, 1].set_xlabel(f"log({x_label})")
+
+    ax[0, 0].set_ylabel(f"{y_label}")
+    ax[1, 0].set_ylabel(f"{y_label}")
+    ax[0, 1].set_ylabel(f"log({y_label})")
+    ax[1, 1].set_ylabel(f"log({y_label})")
+
+    plt.minorticks_off()
+    plt.show()
+
+    return
+
+
+def pairplot_features(
+    df,
+    log_plot=True,
+    x_label="total_negative",
+    y_label="total_positive",
+    hue_label="review_score",
+    alpha=0.75,
+):
+    x = df[x_label]
+    y = df[y_label]
+
+    if log_plot:
+        x = np.log1p(x)
+        y = np.log1p(y)
+
+    fig, ax = plt.subplots()
+    sns.scatterplot(x=x, y=y, hue=df[hue_label], alpha=alpha)
+    plt.show()
 
     return
 
