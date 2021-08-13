@@ -48,6 +48,15 @@ python fit_model.py
 - Steam API's [`appreviews`][steamapi-getreviews] endpoint, to get a dump of reviews on an application in Steam
 - [`steamreviews`][pypi-steamreviews]: a PyPI package to download Steam reviews
 
+### Regression tools and documentation
+
+- [`pwlfit`][pypi-pwlfit]: Google's library to fit piece-wise linear functions,
+- [`tidfit`][pypi-tidfit]: a wrapper around SciPy's `curve_fit` for 1D signals.
+- Some documentation by [`scipy`][pypi-scipy] and [`sklearn`][pypi-sklearn]:
+  - [supervised learning][sklearn-supervised-learning-doc]
+  - [common pitfalls with linear regression][sklearn-common-pitfalls-doc]
+  - [losses for robust fitting][scipy-robust-fitting-doc]
+
 ### Blog posts
 
 - Jake Birkett, [How to estimate how many sales a Steam game has made][birkett15], March 2015
