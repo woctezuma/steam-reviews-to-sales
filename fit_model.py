@@ -1,70 +1,202 @@
 import matplotlib
 import matplotlib.pyplot as plt
+import numpy as np
 import tidfit
-from sklearn import linear_model
-from sklearn.model_selection import train_test_split
 
 from analyze_data import (
     load_aggregated_data_as_df,
-    remove_extreme_values,
 )
-from utils.plot_utils import plot_arrays, plot_predictions, plot_pie
+from utils.plot_utils import (
+    plot_arrays,
+    plot_predictions,
+    plot_pie,
+    grid_plot,
+    pairplot_features,
+)
+from utils.regression_utils import (
+    benchmark_models,
+    fit_linear_model,
+    detect_outliers,
+    cross_validate_model,
+)
 from utils.reviews_utils import unify_descriptions
 
 
-def fit_linear_model(X, y, fit_intercept=True):
-    # Reference: https://scikit-learn.org/stable/supervised_learning.html
+def get_test_apps():
+    all_features = ["review_score", "total_positive", "total_negative", "total_reviews"]
 
-    X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=0)
+    # Reference: https://store.steampowered.com/appreviews/892970?json=1&num_per_page=0&language=all&purchase_type=all&filter_offtopic_activity=0
+    test_apps = {
+        "Valheim": {"appID": 892970, "data": [9, 246944, 10706, 257650]},
+        "Iratus": {"appID": 807120, "data": [8, 4606, 698, 5304]},
+    }
 
-    model = linear_model.LinearRegression(fit_intercept=fit_intercept)
-    model.fit(X_train, y_train)
-
-    y_pred = model.predict(X_test)
-
-    score_train = model.score(X_train, y_train)
-    score_test = model.score(X_test, y_test)
-
-    print(f"[training] R²: {score_train}")
-    print(f"[test] R²: {score_test}")
-    print(f"[model] coefficients: {model.coef_}")
-    print(f"[model] intercept: {model.intercept_}")
-
-    return model
+    return test_apps, all_features
 
 
-def main():
-    matplotlib.use("Qt5Agg")
+def check_test_apps(model, features):
+    test_apps, all_features = get_test_apps()
 
-    df = load_aggregated_data_as_df(sort_by_num_reviews=True)
-    plot_pie(df)
-    plot_pie(unify_descriptions(df), percentage_threshold=1)
-    df = remove_extreme_values(df, "sales")
-    df = remove_extreme_values(df, "total_reviews", 0.25, 1.0)
+    for app_name in test_apps.keys():
+        v_test = test_apps[app_name]["data"]
 
-    # Filter by review score
-    df = df[df["review_score"] == 9]
+        v = [v_test[i] for (i, f) in enumerate(all_features) if f in features]
+        v = np.array(v).reshape(1, -1)
 
-    X = df.loc[:, df.columns == "total_reviews"]
+        p = model.predict(v)
+
+        print(f"Input: {app_name} ---> predicted sales: {p[0] / 1e6:.3f} M")
+
+    return
+
+
+def run_1d_fit(
+    df,
+    fit_intercept=True,
+    standardize_input=False,
+    apply_ransac=False,
+    apply_log_to_target=False,
+    apply_log_to_input=False,
+    num_segments_pwl=3,
+    verbose=True,
+):
+    ## Single feature
+    features = ["total_reviews"]
+
+    X = df[features]
     y = df["sales"]
+
+    model = fit_linear_model(
+        X,
+        y,
+        fit_intercept=fit_intercept,
+        standardize_input=standardize_input,
+        apply_ransac=apply_ransac,
+        apply_log_to_target=apply_log_to_target,
+    )
+    check_test_apps(model, features)
+
+    benchmark_models(
+        X,
+        y,
+        fit_intercept=fit_intercept,
+        apply_log_to_input=apply_log_to_input,
+        apply_log_to_target=apply_log_to_target,
+        num_segments_pwl=num_segments_pwl,
+    )
+
+    plot_predictions(X, y, X.squeeze(), model.predict(X))
+    plt.show()
 
     x_train = X.squeeze()
     y_train = y
 
     # Reference: https://github.com/aminnj/tidfit
 
-    plot_arrays(x_train, y_train)
-    out = tidfit.fit("a*x", x_train, y_train)
-    plt.show()
+    if verbose:
+        plot_arrays(x_train, y_train)
+        out = tidfit.fit("a*x", x_train, y_train)
+        plt.show()
 
-    plot_arrays(x_train, y_train)
-    out = tidfit.fit("a*x+b", x_train, y_train)
-    plt.show()
+    if verbose:
+        plot_arrays(x_train, y_train)
+        out = tidfit.fit("a*x+b", x_train, y_train)
+        plt.show()
 
-    model = fit_linear_model(X, y, fit_intercept=True)
-    y_pred = model.predict(X)
-    plot_predictions(X, y, X.squeeze(), ymean=y_pred, ystd=0)
-    plt.show()
+    return
+
+
+def run_2d_fit(
+    df,
+    fit_intercept=True,
+    standardize_input=False,
+    apply_ransac=False,
+    apply_log_to_target=False,
+    verbose=True,
+):
+    ## Two features
+    features = ["total_positive", "total_negative"]
+
+    X = df[features]
+    y = df["sales"]
+
+    if verbose:
+        pairplot_features(df, log_plot=True)
+
+    model = fit_linear_model(
+        X,
+        y,
+        fit_intercept=fit_intercept,
+        standardize_input=standardize_input,
+        apply_ransac=apply_ransac,
+        apply_log_to_target=apply_log_to_target,
+    )
+    check_test_apps(model, features)
+
+    cross_validate_model(model, X, y)
+
+    return
+
+
+def main():
+    matplotlib.use("Qt5Agg")
+
+    fit_intercept = True
+    standardize_input = False
+    apply_ransac = False
+    apply_log_to_target = False
+    apply_log_to_input = False
+    num_segments_pwl = 3
+    verbose = False
+
+    # If a game has fewer than 500 reviews, I am not sure that we could infer a lot anyway, because:
+    # - there is a lot of variability in the range [0, 500] reviews,
+    # - games cannot have "overwhelmingly" bad or good ratings (review_score 1 or 9).
+    # NB: With this threshold, games with review_score 0, 3 or 7 are necessarily excluded!
+    threshold_num_reviews = 5e2
+
+    # Caveat: the following choice is extremely important, because outliers impact the regression a lot!
+    # Typical choices would be:
+    # - either "minkowski" to remove games with many reviews, or bad ratings (data bias towards positive ratings)
+    # - or "cosine" to remove games which do not align well with others. This is very relevant for linear regression!
+    outlier_metric = "cosine"
+
+    df = load_aggregated_data_as_df(sort_by_num_reviews=True)
+    if verbose:
+        plot_pie(df)
+        plot_pie(unify_descriptions(df), percentage_threshold=1)
+
+    df = df.drop(["name", "review_score_desc"], axis=1)
+
+    # Filter out data points with few reviews
+    df = df[df["total_reviews"] >= threshold_num_reviews]
+
+    # Filter out outliers (based on LocalOutlierFactor)
+    is_inlier = detect_outliers(df, metric=outlier_metric, verbose=verbose)
+    df = df[is_inlier]
+
+    if verbose:
+        grid_plot(df)
+
+    run_1d_fit(
+        df,
+        fit_intercept=fit_intercept,
+        standardize_input=standardize_input,
+        apply_ransac=apply_ransac,
+        apply_log_to_target=apply_log_to_target,
+        apply_log_to_input=apply_log_to_input,
+        num_segments_pwl=num_segments_pwl,
+        verbose=verbose,
+    )
+
+    run_2d_fit(
+        df,
+        fit_intercept=fit_intercept,
+        standardize_input=standardize_input,
+        apply_ransac=apply_ransac,
+        apply_log_to_target=apply_log_to_target,
+        verbose=verbose,
+    )
 
     return True
 
