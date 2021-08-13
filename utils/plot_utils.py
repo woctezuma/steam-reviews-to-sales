@@ -115,6 +115,9 @@ def grid_plot(df, x_label="total_reviews", y_label="sales", alpha=0.5):
     x = df[x_label]
     y = df[y_label]
 
+    sns.pairplot(df[[y_label, x_label]], kind="reg", diag_kind="kde")
+    plt.show()
+
     fig, ax = plt.subplots(nrows=2, ncols=2)
 
     ax[0, 0].scatter(x, y, alpha=alpha)
