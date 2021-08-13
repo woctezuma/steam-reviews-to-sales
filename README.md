@@ -73,6 +73,14 @@ python fit_model.py
 [steamapi-getreviews]: <https://partner.steamgames.com/doc/store/getreviews>
 [pypi-steamreviews]: <https://github.com/woctezuma/download-steam-reviews>
 
+[pypi-pwlfit]: <https://github.com/google/pwlfit>
+[pypi-tidfit]: <https://github.com/aminnj/tidfit>
+[pypi-scipy]: <https://github.com/scipy/scipy>
+[pypi-sklearn]: <https://github.com/scikit-learn/scikit-learn>
+[sklearn-supervised-learning-doc]: <https://scikit-learn.org/stable/supervised_learning.html>
+[sklearn-common-pitfalls-doc]: <https://scikit-learn.org/stable/auto_examples/inspection/plot_linear_model_coefficient_interpretation.html>
+[scipy-robust-fitting-doc]: <https://scipy-cookbook.readthedocs.io/items/robust_regression.html>
+
 [birkett15]: <https://greyaliengames.com/blog/how-to-estimate-how-many-sales-a-steam-game-has-made/>
 [birkett18]: <https://www.gamasutra.com/blogs/JakeBirkett/20180504/317366/Using_Steam_reviews_to_estimate_sales.php>
 [carless20]: <https://newsletter.gamediscover.co/p/how-that-game-sold-on-steam-using>
