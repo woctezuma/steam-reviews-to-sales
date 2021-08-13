@@ -9,6 +9,7 @@ This repository contains Python code to study the relationship between review nu
 
 ```bash
 pip install -r requirements.txt
+pip install git+https://github.com/google/pwlfit.git
 ```
 
 [python-download]: <https://www.python.org/downloads/>
