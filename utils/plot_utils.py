@@ -163,6 +163,23 @@ def pairplot_features(
     return
 
 
+def plot_boxleiter_ratios(df):
+    df["ratio"] = (1 + df["sales"]) / (1 + df["total_reviews"])
+    df["inverse_ratio"] = (1 + df["total_reviews"]) / (1 + df["sales"])
+
+    fig, ax = plt.subplots(nrows=2)
+
+    df["ratio"].plot.hist(bins=100, ax=ax[0])
+    df["inverse_ratio"].plot.hist(bins=100, ax=ax[1])
+
+    ax[0].set_xlabel("ratio: #sales/#reviews")
+    ax[1].set_xlabel("inverse ratio: #reviews/#sales")
+
+    plt.show()
+
+    return
+
+
 def main():
     matplotlib.use("Qt5Agg")
 
