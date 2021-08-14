@@ -1,11 +1,11 @@
 import tidfit
 from matplotlib import pyplot as plt
 
-from utils.test_utils import check_test_apps
 from utils.benchmark_utils import benchmark_models
 from utils.coefficient_utils import cross_validate_model
 from utils.plot_utils import plot_predictions, plot_arrays, pairplot_features
 from utils.regression_utils import fit_linear_model
+from utils.test_utils import check_test_apps
 
 
 def run_1d_fit(
