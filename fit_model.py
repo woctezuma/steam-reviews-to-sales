@@ -57,6 +57,7 @@ def main():
         apply_log_to_target=apply_log_to_target,
         apply_log_to_input=apply_log_to_input,
         num_segments_pwl=num_segments_pwl,
+        features=["total_reviews"],
         verbose=verbose,
     )
 
@@ -66,6 +67,7 @@ def main():
         standardize_input=standardize_input,
         apply_ransac=apply_ransac,
         apply_log_to_target=apply_log_to_target,
+        features=["total_positive", "total_negative"],
         verbose=verbose,
     )
 
