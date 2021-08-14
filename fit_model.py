@@ -5,7 +5,7 @@ from analyze_data import (
 )
 from utils.fit_utils import run_1d_fit, run_2d_fit
 from utils.outlier_utils import detect_outliers
-from utils.plot_utils import plot_pie, grid_plot
+from utils.plot_utils import plot_pie, grid_plot, plot_boxleiter_ratios
 from utils.reviews_utils import unify_descriptions
 
 
@@ -48,6 +48,7 @@ def main():
 
     if verbose:
         grid_plot(df)
+        plot_boxleiter_ratios(df)
 
     run_1d_fit(
         df,
