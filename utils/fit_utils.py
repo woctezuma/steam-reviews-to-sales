@@ -17,14 +17,18 @@ def run_1d_fit(
     apply_log_to_input=False,
     num_segments_pwl=3,
     features=None,
+    target_name=None,
     verbose=True,
 ):
     ## Single feature
     if features is None:
         features = ["total_reviews"]
 
+    if target_name is None:
+        target_name = "sales"
+
     X = df[features]
-    y = df["sales"]
+    y = df[target_name]
 
     model = fit_linear_model(
         X,
@@ -73,14 +77,18 @@ def run_2d_fit(
     apply_ransac=False,
     apply_log_to_target=False,
     features=None,
+    target_name=None,
     verbose=True,
 ):
     ## Two features
     if features is None:
         features = ["total_positive", "total_negative"]
 
+    if target_name is None:
+        target_name = "sales"
+
     X = df[features]
-    y = df["sales"]
+    y = df[target_name]
 
     if verbose:
         pairplot_features(df, log_plot=True)
