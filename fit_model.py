@@ -1,4 +1,5 @@
 import matplotlib
+import seaborn as sns
 
 from analyze_data import (
     load_aggregated_data_as_df,
@@ -11,6 +12,9 @@ from utils.reviews_utils import unify_descriptions
 
 def main():
     matplotlib.use("Qt5Agg")
+
+    # Reference: https://seaborn.pydata.org/tutorial/color_palettes.html#qualitative-color-palettes
+    sns.set_palette(sns.color_palette("colorblind"))
 
     fit_intercept = True
     standardize_input = False
