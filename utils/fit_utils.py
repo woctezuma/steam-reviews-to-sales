@@ -16,10 +16,12 @@ def run_1d_fit(
     apply_log_to_target=False,
     apply_log_to_input=False,
     num_segments_pwl=3,
+    features=None,
     verbose=True,
 ):
     ## Single feature
-    features = ["total_reviews"]
+    if features is None:
+        features = ["total_reviews"]
 
     X = df[features]
     y = df["sales"]
@@ -70,10 +72,12 @@ def run_2d_fit(
     standardize_input=False,
     apply_ransac=False,
     apply_log_to_target=False,
+    features=None,
     verbose=True,
 ):
     ## Two features
-    features = ["total_positive", "total_negative"]
+    if features is None:
+        features = ["total_positive", "total_negative"]
 
     X = df[features]
     y = df["sales"]
