@@ -58,6 +58,7 @@ def main():
         apply_log_to_input=apply_log_to_input,
         num_segments_pwl=num_segments_pwl,
         features=["total_reviews"],
+        target_name="sales",
         verbose=verbose,
     )
 
@@ -68,6 +69,7 @@ def main():
         apply_ransac=apply_ransac,
         apply_log_to_target=apply_log_to_target,
         features=["total_positive", "total_negative"],
+        target_name="sales",
         verbose=verbose,
     )
 
