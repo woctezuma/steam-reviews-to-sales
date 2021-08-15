@@ -87,6 +87,13 @@ def benchmark_models(
     fig, ax = plt.subplots()
 
     _ = ax.plot(
+        X,
+        res_cauchy.x[0] * X + res_cauchy.x[1],
+        "orange",
+        label=f"SciPy (cauchy {res_cauchy.x[0]:.0f})",
+    )
+
+    _ = ax.plot(
         X, est_svm.predict(X), "blue", label=f"LinearSVR {est_svm.coef_[0]:.0f}"
     )
 
@@ -99,13 +106,6 @@ def benchmark_models(
 
     _ = ax.plot(
         X, est_reg.predict(X), "green", label=f"LinearRegression {est_reg.coef_[0]:.0f}"
-    )
-
-    _ = ax.plot(
-        X,
-        res_cauchy.x[0] * X + res_cauchy.x[1],
-        "orange",
-        label=f"SciPy (cauchy {res_cauchy.x[0]:.0f})",
     )
 
     _ = ax.plot(
