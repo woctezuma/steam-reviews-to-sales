@@ -1,10 +1,12 @@
 import numpy as np
 
+from utils.reviews_utils import get_steam_api_url
+from utils.time_utils import get_target_date_as_timestamp
+
 
 def get_test_apps():
     all_features = ["review_score", "total_positive", "total_negative", "total_reviews"]
 
-    # Reference: https://store.steampowered.com/appreviews/892970?json=1&num_per_page=0&language=all&purchase_type=all&filter_offtopic_activity=0
     test_apps = {
         "Valheim (5.0 M)": {
             "appID": 892970,
@@ -60,3 +62,27 @@ def check_test_apps(model, features):
         print(f"Input: {app_name} ---> predicted sales: {p[0] / 1e6:.3f} M")
 
     return
+
+
+def get_api_url(app_id, end_date, verbose=True):
+    target_timestamp = get_target_date_as_timestamp(end_date, verbose=verbose)
+
+    url = get_steam_api_url(app_id)
+    url += "?json=1&num_per_page=0&language=all&purchase_type=all&filter_offtopic_activity=0"
+    url += f"&start_date=1&end_date={target_timestamp}&date_range_type=include"
+
+    return url
+
+
+def main():
+    test_apps, all_features = get_test_apps()
+
+    for app_name, app in test_apps.items():
+        url = get_api_url(app_id=app["appID"], end_date=app["date"], verbose=False)
+        print(f"{app_name} -> {url}")
+
+    return True
+
+
+if __name__ == "__main__":
+    main()
