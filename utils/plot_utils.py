@@ -182,6 +182,7 @@ def plot_boxleiter_ratios(df):
 
 def main():
     matplotlib.use("Qt5Agg")
+    sns.set_palette(sns.color_palette("colorblind"))
 
     return True
 

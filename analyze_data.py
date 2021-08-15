@@ -1,6 +1,7 @@
 import matplotlib
 import numpy as np
 import pandas as pd
+import seaborn as sns
 
 from download_data import load_output_dict
 from utils.data_utils import load_input_data
@@ -79,6 +80,7 @@ def get_arrays_from(df, num_features=1):
 
 def main():
     matplotlib.use("Qt5Agg")
+    sns.set_palette(sns.color_palette("colorblind"))
     review_score_descriptions = get_review_score_descriptions()
 
     df = load_aggregated_data_as_df()
