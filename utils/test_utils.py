@@ -59,7 +59,8 @@ def check_test_apps(model, features):
 
         p = model.predict(v)
 
-        print(f"Input: {app_name} ---> predicted sales: {p[0] / 1e6:.3f} M")
+        sales_estimate = float(p[0])
+        print(f"Input: {app_name} ---> predicted sales: {sales_estimate / 1e6:.3f} M")
 
     return
 
