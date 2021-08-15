@@ -48,6 +48,8 @@ def run_1d_fit(
         apply_log_to_target=apply_log_to_target,
         num_segments_pwl=num_segments_pwl,
     )
+    print("Piece-wise Linear Model predictions:")
+    check_test_apps(pwl_curve, features)
 
     plot_predictions(X, y, X.squeeze(), model.predict(X))
     plt.show()
