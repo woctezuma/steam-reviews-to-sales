@@ -40,7 +40,7 @@ def run_1d_fit(
     )
     check_test_apps(model, features)
 
-    benchmark_models(
+    pwl_curve = benchmark_models(
         X,
         y,
         fit_intercept=fit_intercept,

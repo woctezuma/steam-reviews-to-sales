@@ -132,4 +132,4 @@ def benchmark_models(
     ax.legend()
     plt.show()
 
-    return
+    return curve
