@@ -29,6 +29,13 @@ def get_test_apps():
             "news_url": "https://embracer.com/report/embracer-group-publishes-full-year-report-and-q4-january-march-2021-operational-ebit-increased-216-to-sek-903-million/",
             "sales": 6.8e6,
         },
+        "Valheim (7.9 M)": {
+            "appID": 892970,
+            "data": [9, 238004, 9824, 247828],
+            "date": "2021-07-01",
+            "news_url": "https://embracer.com/wp-content/uploads/2021/08/1455434.pdf",
+            "sales": 7.9e6,
+        },
         "Iratus (0.3 M)": {
             "appID": 807120,
             "data": [8, 4587, 696, 5283],
