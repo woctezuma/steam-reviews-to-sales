@@ -50,6 +50,7 @@ python fit_model.py
 
 ### Regression tools and documentation
 
+- [`mapie`][pypi-mapie]: Model-Agnostic Prediction Interval Estimator (MAPIE),
 - [`pwlfit`][pypi-pwlfit]: Google's library to fit piece-wise linear functions,
 - [`statsmodels`][pypi-statsmodels]: econometric and statistical modeling,
 - [`tidfit`][pypi-tidfit]: a wrapper around SciPy's `curve_fit` for 1D signals.
@@ -74,6 +75,7 @@ python fit_model.py
 [steamapi-getreviews]: <https://partner.steamgames.com/doc/store/getreviews>
 [pypi-steamreviews]: <https://github.com/woctezuma/download-steam-reviews>
 
+[pypi-mapie]: <https://github.com/scikit-learn-contrib/MAPIE>
 [pypi-pwlfit]: <https://github.com/google/pwlfit>
 [pypi-statsmodels]: <https://github.com/statsmodels/statsmodels>
 [pypi-tidfit]: <https://github.com/aminnj/tidfit>
