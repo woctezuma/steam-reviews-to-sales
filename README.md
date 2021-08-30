@@ -51,6 +51,7 @@ python fit_model.py
 ### Regression tools and documentation
 
 - [`pwlfit`][pypi-pwlfit]: Google's library to fit piece-wise linear functions,
+- [`statsmodels`][pypi-statsmodels]: econometric and statistical modeling,
 - [`tidfit`][pypi-tidfit]: a wrapper around SciPy's `curve_fit` for 1D signals.
 - Some documentation by [`scipy`][pypi-scipy] and [`sklearn`][pypi-sklearn]:
   - [supervised learning][sklearn-supervised-learning-doc]
@@ -74,6 +75,7 @@ python fit_model.py
 [pypi-steamreviews]: <https://github.com/woctezuma/download-steam-reviews>
 
 [pypi-pwlfit]: <https://github.com/google/pwlfit>
+[pypi-statsmodels]: <https://github.com/statsmodels/statsmodels>
 [pypi-tidfit]: <https://github.com/aminnj/tidfit>
 [pypi-scipy]: <https://github.com/scipy/scipy>
 [pypi-sklearn]: <https://github.com/scikit-learn/scikit-learn>
