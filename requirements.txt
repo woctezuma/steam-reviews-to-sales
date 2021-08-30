@@ -5,3 +5,4 @@ scikit-learn
 tidfit
 PyQt5
 seaborn
+mapie
