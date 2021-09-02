@@ -14,6 +14,7 @@ def run_1d_fit(
     fit_intercept=True,
     standardize_input=False,
     apply_ransac=False,
+    apply_mapie=False,
     apply_log_to_target=False,
     apply_log_to_input=False,
     num_segments_pwl=3,
@@ -38,6 +39,7 @@ def run_1d_fit(
         fit_intercept=fit_intercept,
         standardize_input=standardize_input,
         apply_ransac=apply_ransac,
+        apply_mapie=apply_mapie,
         apply_log_to_target=apply_log_to_target,
     )
     check_test_apps(model, features)
@@ -69,6 +71,7 @@ def run_2d_fit(
     fit_intercept=True,
     standardize_input=False,
     apply_ransac=False,
+    apply_mapie=False,
     apply_log_to_target=False,
     features=None,
     target_name=None,
@@ -94,6 +97,7 @@ def run_2d_fit(
         fit_intercept=fit_intercept,
         standardize_input=standardize_input,
         apply_ransac=apply_ransac,
+        apply_mapie=apply_mapie,
         apply_log_to_target=apply_log_to_target,
     )
     check_test_apps(model, features)

@@ -1,4 +1,5 @@
 import numpy as np
+from mapie.estimators import MapieRegressor
 from sklearn import linear_model, preprocessing, pipeline
 from sklearn.compose import TransformedTargetRegressor
 from sklearn.model_selection import train_test_split
@@ -11,6 +12,7 @@ def fit_linear_model(
     fit_intercept=True,
     standardize_input=False,
     apply_ransac=False,
+    apply_mapie=False,
     apply_log_to_target=False,
     ransac_fraction=0.1,
 ):
@@ -51,7 +53,12 @@ def fit_linear_model(
             regressor=estimator, func=np.log1p, inverse_func=np.expm1
         )
 
-    model = pipeline.make_pipeline(scaler, estimator)
+    pipe = pipeline.make_pipeline(scaler, estimator)
+
+    if apply_mapie:
+        model = MapieRegressor(pipe)
+    else:
+        model = pipe
 
     model.fit(X_train, y_train)
 

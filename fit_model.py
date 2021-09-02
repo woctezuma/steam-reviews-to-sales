@@ -20,6 +20,7 @@ def main():
     fit_intercept = True
     standardize_input = False
     apply_ransac = False
+    apply_mapie = True
     apply_log_to_target = False
     apply_log_to_input = False
     num_segments_pwl = 3
@@ -61,6 +62,7 @@ def main():
         fit_intercept=fit_intercept,
         standardize_input=standardize_input,
         apply_ransac=apply_ransac,
+        apply_mapie=apply_mapie,
         apply_log_to_target=apply_log_to_target,
         apply_log_to_input=apply_log_to_input,
         num_segments_pwl=num_segments_pwl,
@@ -75,6 +77,7 @@ def main():
         fit_intercept=fit_intercept,
         standardize_input=standardize_input,
         apply_ransac=apply_ransac,
+        apply_mapie=False, # too slow if set to True
         apply_log_to_target=apply_log_to_target,
         features=["total_positive", "total_negative"],
         target_name="sales",
