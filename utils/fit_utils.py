@@ -2,6 +2,7 @@ from matplotlib import pyplot as plt
 
 from utils.benchmark_utils import benchmark_models
 from utils.coefficient_utils import cross_validate_model
+from utils.mapie_utils import predict_with_mapie
 from utils.plot_utils import plot_predictions, plot_arrays, pairplot_features
 from utils.regression_utils import fit_linear_model
 from utils.test_utils import check_test_apps
@@ -55,7 +56,8 @@ def run_1d_fit(
     print("Piece-wise Linear Model predictions:")
     check_test_apps(pwl_curve, features)
 
-    plot_predictions(X, y, X.squeeze(), model.predict(X))
+    ypred, ystd = predict_with_mapie(model, X)
+    plot_predictions(X, y, X.squeeze(), ypred, ystd)
     plt.show()
 
 
