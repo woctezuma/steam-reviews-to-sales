@@ -2,6 +2,7 @@ import numpy as np
 from mapie.estimators import MapieRegressor
 from sklearn import linear_model, preprocessing, pipeline
 from sklearn.compose import TransformedTargetRegressor
+from sklearn.ensemble import GradientBoostingRegressor
 from sklearn.model_selection import train_test_split
 
 
@@ -10,6 +11,7 @@ def fit_linear_model(
     y,
     apply_train_test_split=True,
     fit_intercept=True,
+    specific_base_estimator_name="",
     standardize_input=False,
     apply_ransac=False,
     apply_mapie=False,
@@ -34,9 +36,19 @@ def fit_linear_model(
     log_scaler = preprocessing.FunctionTransformer(func=np.log1p, validate=True)
     poly_scaler = preprocessing.PolynomialFeatures(degree=3, include_bias=False)
 
-    base_estimator = linear_model.LinearRegression(fit_intercept=fit_intercept)
-    base_estimator = linear_model.BayesianRidge(fit_intercept=fit_intercept)
-    base_estimator = linear_model.RidgeCV(fit_intercept=fit_intercept)
+    if specific_base_estimator_name == "linear":
+        base_estimator = linear_model.LinearRegression(fit_intercept=fit_intercept)
+    elif specific_base_estimator_name == "bayes":
+        base_estimator = linear_model.BayesianRidge(fit_intercept=fit_intercept)
+    elif specific_base_estimator_name == "huber":
+        base_estimator = linear_model.HuberRegressor(fit_intercept=fit_intercept)
+    elif specific_base_estimator_name == "boosting":
+        base_estimator = GradientBoostingRegressor(
+            random_state=0, loss="huber", learning_rate=0.01, n_estimators=100
+        )
+    else:
+        # Ridge Cross-Validation
+        base_estimator = linear_model.RidgeCV(fit_intercept=fit_intercept)
 
     if verbose:
         print(base_estimator)

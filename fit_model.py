@@ -18,6 +18,7 @@ def main():
 
     apply_train_test_split = False
     fit_intercept = True
+    specific_base_estimator_name = ""
     standardize_input = False
     apply_ransac = False
     apply_mapie = True
@@ -60,6 +61,7 @@ def main():
         df,
         apply_train_test_split=apply_train_test_split,
         fit_intercept=fit_intercept,
+        specific_base_estimator_name=specific_base_estimator_name,
         standardize_input=standardize_input,
         apply_ransac=apply_ransac,
         apply_mapie=apply_mapie,
@@ -75,6 +77,7 @@ def main():
         df,
         apply_train_test_split=apply_train_test_split,
         fit_intercept=fit_intercept,
+        specific_base_estimator_name=specific_base_estimator_name,
         standardize_input=standardize_input,
         apply_ransac=apply_ransac,
         apply_mapie=False, # too slow if set to True
