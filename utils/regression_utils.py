@@ -15,6 +15,7 @@ def fit_linear_model(
     apply_mapie=False,
     apply_log_to_target=False,
     ransac_fraction=0.1,
+    verbose=True,
 ):
     # Reference: https://scikit-learn.org/stable/supervised_learning.html
 
@@ -36,6 +37,9 @@ def fit_linear_model(
     base_estimator = linear_model.LinearRegression(fit_intercept=fit_intercept)
     base_estimator = linear_model.BayesianRidge(fit_intercept=fit_intercept)
     base_estimator = linear_model.RidgeCV(fit_intercept=fit_intercept)
+
+    if verbose:
+        print(base_estimator)
 
     ransac_estimator = linear_model.RANSACRegressor(
         base_estimator=base_estimator,
