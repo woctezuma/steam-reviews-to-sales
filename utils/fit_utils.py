@@ -107,6 +107,7 @@ def run_2d_fit(
     )
     check_test_apps(model, features)
 
-    cross_validate_model(model, X, y)
+    if specific_base_estimator_name not in ["boosting"]:
+        cross_validate_model(model, X, y)
 
     return
