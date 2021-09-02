@@ -3,7 +3,7 @@ from matplotlib import pyplot as plt
 from utils.benchmark_utils import benchmark_models
 from utils.coefficient_utils import cross_validate_model
 from utils.mapie_utils import predict_with_mapie
-from utils.plot_utils import plot_predictions, plot_arrays, pairplot_features
+from utils.plot_utils import plot_predictions, pairplot_features
 from utils.regression_utils import fit_linear_model
 from utils.test_utils import check_test_apps
 from utils.tidfit_utils import run_linear_tidfit, run_chance_tidfit
@@ -61,7 +61,6 @@ def run_1d_fit(
     ypred, ystd = predict_with_mapie(model, X)
     plot_predictions(X, y, X.squeeze(), ypred, ystd)
     plt.show()
-
 
     if verbose:
         run_linear_tidfit(X, y)

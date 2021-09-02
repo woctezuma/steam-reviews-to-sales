@@ -80,7 +80,7 @@ def main():
         specific_base_estimator_name=specific_base_estimator_name,
         standardize_input=standardize_input,
         apply_ransac=apply_ransac,
-        apply_mapie=False, # too slow if set to True
+        apply_mapie=False,  # too slow if set to True
         apply_log_to_target=apply_log_to_target,
         features=["total_positive", "total_negative"],
         target_name="sales",
