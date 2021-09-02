@@ -30,21 +30,28 @@ def cross_validate_model(model, X, y):
 
     scales = X.std(axis=0)
 
-    coefs = pd.DataFrame(
-        [
-            get_estimator_coefs_for_cv(est, cv_model) * scales
-            for est in cv_model["estimator"]
-        ],
-        columns=X.columns,
-    )
+    try:
+        # Caveat: this function is only for linear regression models with slopes/coefficients to interpret!
+        coefs = pd.DataFrame(
+            [
+                get_estimator_coefs_for_cv(est, cv_model) * scales
+                for est in cv_model["estimator"]
+            ],
+            columns=X.columns,
+        )
+    except AttributeError:
+        # If you arrive here, you must have called this function with a model such as GradientBoostingRegressor.
+        # To avoid wasting compute, it would be better not to call this function at all for such models!
+        coefs = []
 
-    plt.figure(figsize=(9, 7))
-    sns.stripplot(data=coefs, orient="h", color="k", alpha=0.5)
-    sns.boxplot(data=coefs, orient="h", color="cyan", saturation=0.5)
-    plt.axvline(x=0, color=".5")
-    plt.xlabel("Coefficient importance")
-    plt.title("Coefficient importance and its variability")
-    plt.subplots_adjust(left=0.3)
-    plt.show()
+    if len(coefs) > 0:
+        plt.figure(figsize=(9, 7))
+        sns.stripplot(data=coefs, orient="h", color="k", alpha=0.5)
+        sns.boxplot(data=coefs, orient="h", color="cyan", saturation=0.5)
+        plt.axvline(x=0, color=".5")
+        plt.xlabel("Coefficient importance")
+        plt.title("Coefficient importance and its variability")
+        plt.subplots_adjust(left=0.3)
+        plt.show()
 
     return
