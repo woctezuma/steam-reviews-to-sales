@@ -7,6 +7,7 @@ from sklearn.model_selection import train_test_split
 def fit_linear_model(
     X,
     y,
+    apply_train_test_split=True,
     fit_intercept=True,
     standardize_input=False,
     apply_ransac=False,
@@ -15,7 +16,13 @@ def fit_linear_model(
 ):
     # Reference: https://scikit-learn.org/stable/supervised_learning.html
 
-    X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=0)
+    if apply_train_test_split:
+        X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=0)
+    else:
+        X_train = X
+        X_test = X
+        y_train = y
+        y_test = y
 
     scaler = preprocessing.StandardScaler(
         with_mean=standardize_input, with_std=standardize_input

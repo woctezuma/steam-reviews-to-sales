@@ -16,6 +16,7 @@ def main():
     # Reference: https://seaborn.pydata.org/tutorial/color_palettes.html#qualitative-color-palettes
     sns.set_palette(sns.color_palette("colorblind"))
 
+    apply_train_test_split = False
     fit_intercept = True
     standardize_input = False
     apply_ransac = False
@@ -56,6 +57,7 @@ def main():
 
     run_1d_fit(
         df,
+        apply_train_test_split=apply_train_test_split,
         fit_intercept=fit_intercept,
         standardize_input=standardize_input,
         apply_ransac=apply_ransac,
@@ -69,6 +71,7 @@ def main():
 
     run_2d_fit(
         df,
+        apply_train_test_split=apply_train_test_split,
         fit_intercept=fit_intercept,
         standardize_input=standardize_input,
         apply_ransac=apply_ransac,

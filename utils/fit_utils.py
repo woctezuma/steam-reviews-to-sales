@@ -10,6 +10,7 @@ from utils.tidfit_utils import run_linear_tidfit, run_chance_tidfit
 
 def run_1d_fit(
     df,
+    apply_train_test_split=True,
     fit_intercept=True,
     standardize_input=False,
     apply_ransac=False,
@@ -33,6 +34,7 @@ def run_1d_fit(
     model = fit_linear_model(
         X,
         y,
+        apply_train_test_split=apply_train_test_split,
         fit_intercept=fit_intercept,
         standardize_input=standardize_input,
         apply_ransac=apply_ransac,
@@ -63,6 +65,7 @@ def run_1d_fit(
 
 def run_2d_fit(
     df,
+    apply_train_test_split=True,
     fit_intercept=True,
     standardize_input=False,
     apply_ransac=False,
@@ -87,6 +90,7 @@ def run_2d_fit(
     model = fit_linear_model(
         X,
         y,
+        apply_train_test_split=apply_train_test_split,
         fit_intercept=fit_intercept,
         standardize_input=standardize_input,
         apply_ransac=apply_ransac,
