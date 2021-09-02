@@ -1,4 +1,3 @@
-import tidfit
 from matplotlib import pyplot as plt
 
 from utils.benchmark_utils import benchmark_models
@@ -6,6 +5,7 @@ from utils.coefficient_utils import cross_validate_model
 from utils.plot_utils import plot_predictions, plot_arrays, pairplot_features
 from utils.regression_utils import fit_linear_model
 from utils.test_utils import check_test_apps
+from utils.tidfit_utils import run_linear_tidfit, run_chance_tidfit
 
 
 def run_1d_fit(
@@ -54,20 +54,9 @@ def run_1d_fit(
     plot_predictions(X, y, X.squeeze(), model.predict(X))
     plt.show()
 
-    x_train = X.squeeze()
-    y_train = y
-
-    # Reference: https://github.com/aminnj/tidfit
 
     if verbose:
-        plot_arrays(x_train, y_train)
-        out = tidfit.fit("a*x", x_train, y_train)
-        plt.show()
-
-    if verbose:
-        plot_arrays(x_train, y_train)
-        out = tidfit.fit("a*x+b", x_train, y_train)
-        plt.show()
+        run_linear_tidfit(X, y)
 
     return
 
