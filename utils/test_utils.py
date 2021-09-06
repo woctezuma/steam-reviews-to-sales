@@ -1,10 +1,16 @@
 import numpy as np
 
+from utils.mapie_utils import (
+    predict_with_mapie,
+    get_prediction_bounds,
+    invert_prediction_bounds,
+)
 from utils.reviews_utils import get_steam_api_url
 from utils.time_utils import get_target_date_as_timestamp
 from utils.transform_utils import (
     get_review_chance,
     get_review_multiplier,
+    invert_review_chance,
 )
 
 
@@ -74,7 +80,9 @@ def get_test_apps():
     return test_apps, all_features
 
 
-def check_test_apps(model, features):
+def check_test_apps(
+    model, features, transform_output=False, arbitrary_display_threshold=3
+):
     test_apps, all_features = get_test_apps()
 
     for app_name in test_apps.keys():
@@ -83,10 +91,29 @@ def check_test_apps(model, features):
         v = [v_test[i] for (i, f) in enumerate(all_features) if f in features]
         v = np.array(v).reshape(1, -1)
 
-        p = model.predict(v)
+        p, sigma = predict_with_mapie(model, v)
+        p_lower, p_upper = get_prediction_bounds(p, sigma, required_to_be_positive=True)
+
+        if transform_output:
+            p = invert_review_chance(v, p)
+            p_lower, p_upper = invert_prediction_bounds(v, p_lower, p_upper)
+
+        p_lower = float(p_lower)
+        p_upper = float(p_upper)
+
+        if sigma != 0:
+            # Arbitrary check to avoid displaying an extremely high (and thus uninformative) upper-bound
+            if p_upper > arbitrary_display_threshold * p:
+                suffixe = f"(at least {p_lower / 1e6:.3f} M)"
+            else:
+                suffixe = f"in [ {p_lower / 1e6:.3f} M ; {p_upper / 1e6:.3f} M ]"
+        else:
+            suffixe = ""
 
         sales_estimate = float(p[0])
-        print(f"Input: {app_name} ---> predicted sales: {sales_estimate / 1e6:.3f} M")
+        print(
+            f"Input: {app_name} ---> predicted sales: {sales_estimate / 1e6:.3f} M {suffixe}"
+        )
 
     return
 
