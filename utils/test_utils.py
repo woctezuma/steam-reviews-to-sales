@@ -2,6 +2,23 @@ import numpy as np
 
 from utils.reviews_utils import get_steam_api_url
 from utils.time_utils import get_target_date_as_timestamp
+from utils.transform_utils import (
+    get_review_chance,
+    get_review_multiplier,
+)
+
+
+def expand_targets_in_test_apps(test_apps, all_features):
+    for app_name in test_apps.keys():
+        v_test = test_apps[app_name]["data"]
+
+        X = v_test[all_features.index("total_reviews")]
+        y = test_apps[app_name]["sales"]
+
+        test_apps[app_name]["review_chance"] = f"{get_review_chance(X, y):.3f}"
+        test_apps[app_name]["review_multiplier"] = f"{get_review_multiplier(X, y):.0f}"
+
+    return test_apps
 
 
 def get_test_apps():
@@ -51,6 +68,8 @@ def get_test_apps():
             "sales": 1e5,
         },
     }
+
+    test_apps = expand_targets_in_test_apps(test_apps, all_features)
 
     return test_apps, all_features
 
