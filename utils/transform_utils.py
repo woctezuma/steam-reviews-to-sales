@@ -26,3 +26,12 @@ def get_review_multiplier(X, y):
     # Output:
     # - "review multiplier"
     return np.divide(np.asarray(y), (1 + X))
+
+
+def invert_review_multiplier(X, multiplier):
+    # Inputs:
+    # - X is the number of reviews
+    # - m is the "review multiplier"
+    # Output:
+    # - number of sales
+    return np.multiply(np.asarray(multiplier), (1 + X))
