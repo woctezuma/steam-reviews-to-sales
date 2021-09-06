@@ -50,9 +50,12 @@ def get_prediction_bounds(ypred, ystd, required_to_be_positive=True):
     return p_lower, p_upper
 
 
-def invert_prediction_bounds(X, p_lower, p_upper):
-    inv_p_lower = invert_review_chance(X, p_lower)
-    inv_p_upper = invert_review_chance(X, p_upper)
+def invert_prediction_bounds(X, p_lower, p_upper, inverse_func=None):
+    if inverse_func is None:
+        inverse_func = invert_review_chance
+
+    inv_p_lower = inverse_func(X, p_lower)
+    inv_p_upper = inverse_func(X, p_upper)
 
     p_lower = min(inv_p_lower, inv_p_upper)
     p_upper = max(inv_p_lower, inv_p_upper)

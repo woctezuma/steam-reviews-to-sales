@@ -81,8 +81,15 @@ def get_test_apps():
 
 
 def check_test_apps(
-    model, features, transform_output=False, arbitrary_display_threshold=3
+    model,
+    features,
+    transform_output=False,
+    inverse_func=None,
+    arbitrary_display_threshold=3,
 ):
+    if inverse_func is None:
+        inverse_func = invert_review_chance
+
     test_apps, all_features = get_test_apps()
 
     for app_name in test_apps.keys():
@@ -95,8 +102,10 @@ def check_test_apps(
         p_lower, p_upper = get_prediction_bounds(p, sigma, required_to_be_positive=True)
 
         if transform_output:
-            p = invert_review_chance(v, p)
-            p_lower, p_upper = invert_prediction_bounds(v, p_lower, p_upper)
+            p = inverse_func(v, p)
+            p_lower, p_upper = invert_prediction_bounds(
+                v, p_lower, p_upper, inverse_func=inverse_func
+            )
 
         p_lower = float(p_lower)
         p_upper = float(p_upper)
