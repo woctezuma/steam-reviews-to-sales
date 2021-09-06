@@ -90,8 +90,18 @@ def easy_plot(
     return
 
 
-def plot_predictions(x_train, y_train, x_test, ymean, ystd=None, xlim=None, ylim=None):
-    ax = plot_arrays(x_train, y_train)
+def plot_predictions(
+    x_train,
+    y_train,
+    x_test,
+    ymean,
+    ystd=None,
+    xlim=None,
+    ylim=None,
+    xlabel="#reviews",
+    ylabel="#owners",
+):
+    ax = plot_arrays(x_train, y_train, xlabel=xlabel, ylabel=ylabel)
     ax.plot(x_test, ymean, color="red", label="predict mean")
     if ystd is not None:
         ax.fill_between(
