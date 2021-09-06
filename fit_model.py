@@ -4,7 +4,7 @@ import seaborn as sns
 from analyze_data import (
     load_aggregated_data_as_df,
 )
-from utils.fit_utils import run_1d_fit, run_2d_fit
+from utils.fit_utils import run_1d_fit, run_2d_fit, run_1d_fit_to_chance
 from utils.outlier_utils import detect_outliers
 from utils.plot_utils import plot_pie, grid_plot, plot_boxleiter_ratios
 from utils.reviews_utils import unify_descriptions
@@ -39,6 +39,11 @@ def main():
     # - or "cosine" to remove games which do not align well with others. This is very relevant for linear regression!
     outlier_metric = "cosine"
 
+    # One of:
+    # - review_chance
+    # - review_multiplier
+    chance_target = "review_chance"
+
     df = load_aggregated_data_as_df(sort_by_num_reviews=True)
     if verbose:
         plot_pie(df)
@@ -52,6 +57,16 @@ def main():
     # Filter out outliers (based on LocalOutlierFactor)
     is_inlier = detect_outliers(df, metric=outlier_metric, verbose=verbose)
     df = df[is_inlier]
+
+    run_1d_fit_to_chance(
+        df,
+        apply_train_test_split=apply_train_test_split,
+        fit_intercept=fit_intercept,
+        specific_base_estimator_name=specific_base_estimator_name,
+        apply_mapie=apply_mapie,
+        chance_target=chance_target,
+        verbose=verbose,
+    )
 
     if verbose:
         grid_plot(df)
