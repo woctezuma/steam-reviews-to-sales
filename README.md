@@ -66,6 +66,7 @@ python fit_model.py
 - Simon Carless, [How that game sold on Steam, using the 'NB number'][carless20], August 2020
 - VG Insights, [How to Estimate Steam Video Game Sales?][vginsights21], August 2021
 - Simon Carless, [Epic advances, Steam reviews, oh my!][carless21], August 2021
+- VG Insights, [Further analysis into Steam Reviews to Sales ratio][vginsights21-followup], October 2021
 
 <!-- Definitions -->
 
@@ -90,4 +91,4 @@ python fit_model.py
 [carless20]: <https://newsletter.gamediscover.co/p/how-that-game-sold-on-steam-using>
 [vginsights21]: <https://vginsights.com/insights/article/how-to-estimate-steam-video-game-sales/>
 [carless21]: <https://newsletter.gamediscover.co/p/epic-advances-steam-reviews-oh-my>
-
+[vginsights21-followup]: <https://vginsights.com/insights/article/further-analysis-into-steam-reviews-to-sales-ratio-how-to-estimate-video-game-sales>
