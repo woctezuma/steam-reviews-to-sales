@@ -67,6 +67,7 @@ python fit_model.py
 - VG Insights, [How to Estimate Steam Video Game Sales?][vginsights21], August 2021
 - Simon Carless, [Epic advances, Steam reviews, oh my!][carless21], August 2021
 - VG Insights, [Further analysis into Steam Reviews to Sales ratio][vginsights21-followup], October 2021
+- VG Insights, [Steam sales estimation methodology and accuracy][vginsights22-improvement], June 2022
 
 <!-- Definitions -->
 
@@ -92,3 +93,4 @@ python fit_model.py
 [vginsights21]: <https://vginsights.com/insights/article/how-to-estimate-steam-video-game-sales/>
 [carless21]: <https://newsletter.gamediscover.co/p/epic-advances-steam-reviews-oh-my>
 [vginsights21-followup]: <https://vginsights.com/insights/article/further-analysis-into-steam-reviews-to-sales-ratio-how-to-estimate-video-game-sales>
+[vginsights22-improvement]: <https://vginsights.com/insights/article/steam-sales-estimation-methodology-and-accuracy>
