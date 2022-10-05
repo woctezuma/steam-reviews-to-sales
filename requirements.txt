@@ -4,5 +4,5 @@ pandas
 scikit-learn
 tidfit
 PyQt5
-seaborn
+seaborn==0.12.0
 mapie
