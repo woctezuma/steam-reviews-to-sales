@@ -3,6 +3,6 @@ numpy
 pandas
 scikit-learn
 tidfit
-PyQt5
+PyQt5==5.15.7
 seaborn
 mapie
