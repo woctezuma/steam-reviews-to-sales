@@ -2,7 +2,7 @@ matplotlib
 numpy
 pandas
 scikit-learn
-tidfit
+tidfit==0.3.2
 PyQt5
 seaborn
 mapie
