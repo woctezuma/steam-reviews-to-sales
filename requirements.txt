@@ -1,6 +1,6 @@
 matplotlib
 numpy
-pandas
+pandas==1.5.0
 scikit-learn
 tidfit
 PyQt5
