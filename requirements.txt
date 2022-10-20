@@ -5,4 +5,4 @@ scikit-learn
 tidfit
 PyQt5
 seaborn
-mapie
+mapie==0.5.0
