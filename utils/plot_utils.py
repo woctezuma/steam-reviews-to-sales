@@ -9,10 +9,7 @@ def plot_pie(df, percentage_threshold=5):
 
     def label_function(val):
         n = val / 100 * len(df)
-        if val < percentage_threshold:
-            s = ""
-        else:
-            s = f"{val:.0f}% ({n:.0f})"
+        s = "" if val < percentage_threshold else f"{val:.0f}% ({n:.0f})"
         return s
 
     fig, ax = plt.subplots()

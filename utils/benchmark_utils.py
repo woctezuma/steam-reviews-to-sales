@@ -141,7 +141,7 @@ def benchmark_models(
         label=f"SciPy (arctan {res_arctan.x[0]:.0f})",
     )
 
-    _ = ax.plot(X, curve.predict(X), "black", label=f"pwlfit")
+    _ = ax.plot(X, curve.predict(X), "black", label="pwlfit")
 
     _ = ax.scatter(X, y, alpha=0.25)
 

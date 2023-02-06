@@ -11,10 +11,10 @@ def get_ouput_fname():
 
 def load_output_dict():
     try:
-        with open(get_ouput_fname(), "r") as f:
+        with open(get_ouput_fname()) as f:
             data = json.load(f)
     except FileNotFoundError:
-        data = dict()
+        data = {}
 
     return data
 
@@ -49,7 +49,7 @@ def get_review_fields():
 
 def download_data(app_ids, verbose=True):
     data = load_output_dict()
-    processed_app_ids = [int(app_id) for app_id in data.keys()]
+    processed_app_ids = [int(app_id) for app_id in data]
 
     unprocessed_app_ids = set(app_ids).difference(processed_app_ids)
 
@@ -64,7 +64,7 @@ def download_data(app_ids, verbose=True):
         if result is not None:
             query_summary = result["query_summary"]
 
-            app_info = dict()
+            app_info = {}
             for key in get_review_fields():
                 app_info[key] = query_summary[key]
 

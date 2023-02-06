@@ -1,9 +1,9 @@
 import numpy as np
 
 from utils.mapie_utils import (
-    predict_with_mapie,
     get_prediction_bounds,
     invert_prediction_bounds,
+    predict_with_mapie,
 )
 from utils.reviews_utils import get_steam_api_url
 from utils.time_utils import get_target_date_as_timestamp
@@ -15,7 +15,7 @@ from utils.transform_utils import (
 
 
 def expand_targets_in_test_apps(test_apps, all_features):
-    for app_name in test_apps.keys():
+    for app_name in test_apps:
         v_test = test_apps[app_name]["data"]
 
         X = v_test[all_features.index("total_reviews")]
@@ -92,7 +92,7 @@ def check_test_apps(
 
     test_apps, all_features = get_test_apps()
 
-    for app_name in test_apps.keys():
+    for app_name in test_apps:
         v_test = test_apps[app_name]["data"]
 
         v = [v_test[i] for (i, f) in enumerate(all_features) if f in features]

@@ -35,10 +35,7 @@ def download_review_stats(app_id, target_timestamp=None, verbose=True):
 
     response = requests.get(url, params=params)
 
-    if response.ok:
-        result = response.json()
-    else:
-        result = None
+    result = response.json() if response.ok else None
 
     if verbose:
         print(result)

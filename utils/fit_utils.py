@@ -3,10 +3,10 @@ from matplotlib import pyplot as plt
 from utils.benchmark_utils import benchmark_models
 from utils.coefficient_utils import cross_validate_model
 from utils.mapie_utils import predict_with_mapie
-from utils.plot_utils import plot_predictions, pairplot_features
+from utils.plot_utils import pairplot_features, plot_predictions
 from utils.regression_utils import fit_linear_model
 from utils.test_utils import check_test_apps
-from utils.tidfit_utils import run_linear_tidfit, run_chance_tidfit
+from utils.tidfit_utils import run_chance_tidfit, run_linear_tidfit
 from utils.transform_utils import (
     get_review_chance,
     get_review_multiplier,

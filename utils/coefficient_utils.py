@@ -1,7 +1,7 @@
 import pandas as pd
 import seaborn as sns
 from matplotlib import pyplot as plt
-from sklearn.model_selection import cross_validate, RepeatedKFold
+from sklearn.model_selection import RepeatedKFold, cross_validate
 
 
 def get_estimator_coefs_for_cv(est, cv_model):

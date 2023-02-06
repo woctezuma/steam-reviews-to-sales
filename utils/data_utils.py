@@ -9,9 +9,9 @@ def load_input_data(fname=None, skip_header=True):
     if fname is None:
         fname = get_input_fname()
 
-    data = dict()
+    data = {}
 
-    with open(fname, "r", encoding="utf8", errors="ignore") as f:
+    with open(fname, encoding="utf8", errors="ignore") as f:
         f_reader = csv.reader(f)
 
         if skip_header:
@@ -22,7 +22,7 @@ def load_input_data(fname=None, skip_header=True):
             num_players = row[1]
             app_id = str(row[2])
 
-            data[app_id] = dict()
+            data[app_id] = {}
             data[app_id]["name"] = app_name.strip()
             data[app_id]["sales"] = int(num_players.replace(",", ""))
 
@@ -36,7 +36,7 @@ def load_app_ids(data=None, fname=None, verbose=True):
     if data is None:
         data = load_input_data(fname, skip_header=True)
 
-    app_ids = [int(app_id) for app_id in data.keys()]
+    app_ids = [int(app_id) for app_id in data]
 
     if verbose:
         print(f"#apps = {len(app_ids)}")

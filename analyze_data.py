@@ -16,14 +16,14 @@ def load_aggregated_data_as_dict(verbose=True):
     app_ids = set(player_data.keys()).intersection(review_data.keys())
     app_ids = sorted(app_ids, key=int)
 
-    data = dict()
+    data = {}
     for app_id in app_ids:
-        data[app_id] = dict()
+        data[app_id] = {}
 
-        for key in player_data[app_id].keys():
+        for key in player_data[app_id]:
             data[app_id][key] = player_data[app_id][key]
 
-        for key in review_data[app_id].keys():
+        for key in review_data[app_id]:
             data[app_id][key] = review_data[app_id][key]
 
     if verbose:
@@ -89,7 +89,7 @@ def main():
 
     easy_plot(df)
 
-    for i in review_score_descriptions.keys():
+    for i in review_score_descriptions:
         easy_plot(df[df["review_score"] == i], enforce_plot_limits=True)
 
     df = load_aggregated_data_as_df()
@@ -98,7 +98,7 @@ def main():
 
     easy_plot(df, use_log_log_scale=True)
 
-    for i in review_score_descriptions.keys():
+    for i in review_score_descriptions:
         easy_plot(
             df[df["review_score"] == i],
             use_log_log_scale=True,

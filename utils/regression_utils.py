@@ -1,6 +1,6 @@
 import numpy as np
 from mapie.estimators import MapieRegressor
-from sklearn import linear_model, preprocessing, pipeline
+from sklearn import linear_model, pipeline, preprocessing
 from sklearn.compose import TransformedTargetRegressor
 from sklearn.ensemble import GradientBoostingRegressor
 from sklearn.model_selection import train_test_split
@@ -63,10 +63,7 @@ def fit_linear_model(
         max_trials=1e3,
     )
 
-    if apply_ransac:
-        estimator = ransac_estimator
-    else:
-        estimator = base_estimator
+    estimator = ransac_estimator if apply_ransac else base_estimator
 
     if apply_log_to_target:
         estimator = TransformedTargetRegressor(
@@ -77,10 +74,7 @@ def fit_linear_model(
 
     pipe = pipeline.make_pipeline(scaler, estimator)
 
-    if apply_mapie:
-        model = MapieRegressor(pipe)
-    else:
-        model = pipe
+    model = MapieRegressor(pipe) if apply_mapie else pipe
 
     model.fit(X_train, y_train)
 

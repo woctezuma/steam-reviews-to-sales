@@ -4,9 +4,9 @@ import seaborn as sns
 from analyze_data import (
     load_aggregated_data_as_df,
 )
-from utils.fit_utils import run_1d_fit, run_2d_fit, run_1d_fit_to_chance
+from utils.fit_utils import run_1d_fit, run_1d_fit_to_chance, run_2d_fit
 from utils.outlier_utils import detect_outliers
-from utils.plot_utils import plot_pie, grid_plot, plot_boxleiter_ratios
+from utils.plot_utils import grid_plot, plot_boxleiter_ratios, plot_pie
 from utils.reviews_utils import unify_descriptions
 
 
