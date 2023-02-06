@@ -17,7 +17,10 @@ def plot_pie(df, percentage_threshold=5):
 
     fig, ax = plt.subplots()
     df.groupby("review_score_desc").size().sort_values().plot(
-        kind="pie", autopct=label_function, textprops={"fontsize": 12}, ax=ax
+        kind="pie",
+        autopct=label_function,
+        textprops={"fontsize": 12},
+        ax=ax,
     )
     ax.set_ylabel("", size=10)
     plt.tight_layout()
@@ -72,11 +75,11 @@ def easy_plot(
     x_column_name="total_reviews",
 ):
     if use_log_log_scale:
-        y_lim = [10, 10 ** 7]
-        x_lim = [10, 10 ** 5]
+        y_lim = [10, 10**7]
+        x_lim = [10, 10**5]
     else:
-        y_lim = [0, 2.6 * 10 ** 6]
-        x_lim = [0, 1.3 * 10 ** 4]
+        y_lim = [0, 2.6 * 10**6]
+        x_lim = [0, 1.3 * 10**4]
 
     ax = plot_df(df, use_log_log_scale=use_log_log_scale, x_column_name=x_column_name)
     superimpose_vginsights(ax, x_test=df[x_column_name])

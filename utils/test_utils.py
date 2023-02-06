@@ -104,7 +104,10 @@ def check_test_apps(
         if transform_output:
             p = inverse_func(v, p)
             p_lower, p_upper = invert_prediction_bounds(
-                v, p_lower, p_upper, inverse_func=inverse_func
+                v,
+                p_lower,
+                p_upper,
+                inverse_func=inverse_func,
             )
 
         p_lower = float(p_lower)
@@ -121,7 +124,7 @@ def check_test_apps(
 
         sales_estimate = float(p[0])
         print(
-            f"Input: {app_name} ---> predicted sales: {sales_estimate / 1e6:.3f} M {suffixe}"
+            f"Input: {app_name} ---> predicted sales: {sales_estimate / 1e6:.3f} M {suffixe}",
         )
 
     return

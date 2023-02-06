@@ -21,7 +21,9 @@ def detect_outliers(
     X = np.array(df[features])
 
     clf = LocalOutlierFactor(
-        n_neighbors=n_neighbors, contamination=outliers_fraction, metric=metric
+        n_neighbors=n_neighbors,
+        contamination=outliers_fraction,
+        metric=metric,
     )
     y_pred = clf.fit_predict(X)
     X_scores = clf.negative_outlier_factor_
@@ -31,7 +33,7 @@ def detect_outliers(
 
     if verbose:
         plt.title(
-            f"Local Outlier Factor (LOF) with n={n_neighbors} and c={outliers_fraction:.2f}"
+            f"Local Outlier Factor (LOF) with n={n_neighbors} and c={outliers_fraction:.2f}",
         )
         plt.scatter(X[:, 0], X[:, 1], color="k", s=3.0, label="Data points")
 

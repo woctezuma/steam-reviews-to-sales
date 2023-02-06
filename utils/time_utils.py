@@ -51,7 +51,8 @@ def convert_from_datetime_to_timestamp(date_as_datetime, verbose=True):
 def get_target_date_as_timestamp(target_date=None, date_format=None, verbose=True):
     target_datetime = get_target_date_as_datetime(target_date, date_format)
     target_timestamp = convert_from_datetime_to_timestamp(
-        target_datetime, verbose=verbose
+        target_datetime,
+        verbose=verbose,
     )
 
     return target_timestamp
@@ -60,7 +61,8 @@ def get_target_date_as_timestamp(target_date=None, date_format=None, verbose=Tru
 def get_today_as_timestamp(verbose=True):
     today_datetime = get_today_as_datetime()
     today_timestamp = convert_from_datetime_to_timestamp(
-        today_datetime, verbose=verbose
+        today_datetime,
+        verbose=verbose,
     )
 
     return today_timestamp

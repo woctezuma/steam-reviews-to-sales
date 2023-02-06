@@ -17,7 +17,7 @@ def describe_pwlfit(curve):
         [
             (j[1] - i[1]) / (j[0] - i[0])
             for (i, j) in zip(curve.points[:-1], curve.points[1:])
-        ]
+        ],
     )
 
     return
@@ -55,22 +55,42 @@ def benchmark_models(
 
     tic = time()
     res = stats.linregress(
-        X.squeeze(), y
+        X.squeeze(),
+        y,
     )  # same as LinearRegression (necessarily with intercept)
     res_lsq = least_squares(
-        f, x0=x0, loss="linear", args=(X.squeeze(), y)
+        f,
+        x0=x0,
+        loss="linear",
+        args=(X.squeeze(), y),
     )  # same as LinearRegression
     res_robust = least_squares(
-        f, x0=x0, loss="soft_l1", f_scale=0.1, args=(X.squeeze(), y)
+        f,
+        x0=x0,
+        loss="soft_l1",
+        f_scale=0.1,
+        args=(X.squeeze(), y),
     )  # roughly the same as Huber
     res_huber = least_squares(
-        f, x0=x0, loss="huber", f_scale=0.1, args=(X.squeeze(), y)
+        f,
+        x0=x0,
+        loss="huber",
+        f_scale=0.1,
+        args=(X.squeeze(), y),
     )
     res_cauchy = least_squares(
-        f, x0=x0, loss="cauchy", f_scale=0.1, args=(X.squeeze(), y)
+        f,
+        x0=x0,
+        loss="cauchy",
+        f_scale=0.1,
+        args=(X.squeeze(), y),
     )
     res_arctan = least_squares(
-        f, x0=x0, loss="arctan", f_scale=0.1, args=(X.squeeze(), y)
+        f,
+        x0=x0,
+        loss="arctan",
+        f_scale=0.1,
+        args=(X.squeeze(), y),
     )
     print(f"done in {time() - tic:.3f}s")
 
@@ -94,7 +114,10 @@ def benchmark_models(
     )
 
     _ = ax.plot(
-        X, est_svm.predict(X), "blue", label=f"LinearSVR {est_svm.coef_[0]:.0f}"
+        X,
+        est_svm.predict(X),
+        "blue",
+        label=f"LinearSVR {est_svm.coef_[0]:.0f}",
     )
 
     _ = ax.plot(
@@ -105,7 +128,10 @@ def benchmark_models(
     )
 
     _ = ax.plot(
-        X, est_reg.predict(X), "green", label=f"LinearRegression {est_reg.coef_[0]:.0f}"
+        X,
+        est_reg.predict(X),
+        "green",
+        label=f"LinearRegression {est_reg.coef_[0]:.0f}",
     )
 
     _ = ax.plot(

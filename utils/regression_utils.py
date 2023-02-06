@@ -30,7 +30,8 @@ def fit_linear_model(
         y_test = y
 
     scaler = preprocessing.StandardScaler(
-        with_mean=standardize_input, with_std=standardize_input
+        with_mean=standardize_input,
+        with_std=standardize_input,
     )
 
     log_scaler = preprocessing.FunctionTransformer(func=np.log1p, validate=True)
@@ -44,7 +45,10 @@ def fit_linear_model(
         base_estimator = linear_model.HuberRegressor(fit_intercept=fit_intercept)
     elif specific_base_estimator_name == "boosting":
         base_estimator = GradientBoostingRegressor(
-            random_state=0, loss="huber", learning_rate=0.01, n_estimators=100
+            random_state=0,
+            loss="huber",
+            learning_rate=0.01,
+            n_estimators=100,
         )
     else:
         # Ridge Cross-Validation
@@ -66,7 +70,9 @@ def fit_linear_model(
 
     if apply_log_to_target:
         estimator = TransformedTargetRegressor(
-            regressor=estimator, func=np.log1p, inverse_func=np.expm1
+            regressor=estimator,
+            func=np.log1p,
+            inverse_func=np.expm1,
         )
 
     pipe = pipeline.make_pipeline(scaler, estimator)
