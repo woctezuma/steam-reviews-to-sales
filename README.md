@@ -68,6 +68,8 @@ python fit_model.py
 - Simon Carless, [Epic advances, Steam reviews, oh my!][carless21], August 2021
 - VG Insights, [Further analysis into Steam Reviews to Sales ratio][vginsights21-followup], October 2021
 - VG Insights, [Steam sales estimation methodology and accuracy][vginsights22-improvement], June 2022
+- Gamalytic, [What makes people review your game? A deep dive into the Steam's sales/review ratio][gamalytic23-deepdive], July 2023
+- Simon Carless, [What 'Steam review count' tells us about your game][carless23], August 2023
 
 <!-- Definitions -->
 
@@ -94,3 +96,5 @@ python fit_model.py
 [carless21]: <https://newsletter.gamediscover.co/p/epic-advances-steam-reviews-oh-my>
 [vginsights21-followup]: <https://vginsights.com/insights/article/further-analysis-into-steam-reviews-to-sales-ratio-how-to-estimate-video-game-sales>
 [vginsights22-improvement]: <https://vginsights.com/insights/article/steam-sales-estimation-methodology-and-accuracy>
+[gamalytic23-deepdive]: <https://gamalytic.com/blog/a-deep-dive-into-the-steam-review-ratio>
+[carless23]: <https://newsletter.gamediscover.co/p/what-steam-review-count-tells-us>
