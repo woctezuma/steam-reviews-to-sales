@@ -72,6 +72,10 @@ python fit_model.py
 - Gamalytic, [What makes people review your game? A deep dive into the Steam's sales/review ratio][gamalytic23-deepdive], July 2023
 - Simon Carless, [What 'Steam review count' tells us about your game][carless23], August 2023
 
+### Other repositories of mine
+
+- [`AmongUs-DAU`][ccu-to-dau]: compute "Daily Active Users" (DAU) of Among Us from "Concurrent Connected Users" (CCU)
+
 <!-- Definitions -->
 
 [arstechnica18-article]: <https://arstechnica.com/gaming/2018/07/steam-data-leak-reveals-precise-player-count-for-thousands-of-games/>
@@ -100,3 +104,5 @@ python fit_model.py
 [gamalytic23-aggregate]: <https://gamalytic.com/blog/how-to-accurately-estimate-steam-sales>
 [gamalytic23-deepdive]: <https://gamalytic.com/blog/a-deep-dive-into-the-steam-review-ratio>
 [carless23]: <https://newsletter.gamediscover.co/p/what-steam-review-count-tells-us>
+
+[ccu-to-dau]: <https://github.com/woctezuma/AmongUs-DAU>
