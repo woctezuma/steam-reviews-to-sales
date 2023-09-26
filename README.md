@@ -54,6 +54,7 @@ python fit_model.py
 - [`pwlfit`][pypi-pwlfit]: Google's library to fit piece-wise linear functions,
 - [`statsmodels`][pypi-statsmodels]: econometric and statistical modeling,
 - [`tidfit`][pypi-tidfit]: a wrapper around SciPy's `curve_fit` for 1D signals.
+- [`lmfit`][pypi-lmfit]: a wrapper around SciPy's `optimize`,
 - Some documentation by [`scipy`][pypi-scipy] and [`sklearn`][pypi-sklearn]:
   - [supervised learning][sklearn-supervised-learning-doc]
   - [common pitfalls with linear regression][sklearn-common-pitfalls-doc]
@@ -88,6 +89,7 @@ python fit_model.py
 [pypi-pwlfit]: <https://github.com/google/pwlfit>
 [pypi-statsmodels]: <https://github.com/statsmodels/statsmodels>
 [pypi-tidfit]: <https://github.com/aminnj/tidfit>
+[pypi-lmfit]: <https://github.com/lmfit/lmfit-py>
 [pypi-scipy]: <https://github.com/scipy/scipy>
 [pypi-sklearn]: <https://github.com/scikit-learn/scikit-learn>
 [sklearn-supervised-learning-doc]: <https://scikit-learn.org/stable/supervised_learning.html>
