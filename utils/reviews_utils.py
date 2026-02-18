@@ -4,7 +4,7 @@ from utils.time_utils import get_target_date_as_timestamp
 
 
 def get_steam_api_url(app_id):
-    return f"https://store.steampowered.com/appreviews/{app_id}"
+    return f"https://store.steampowered.com/ajaxappreviews/{app_id}"
 
 
 def get_request_params(target_timestamp=None, verbose=True):
